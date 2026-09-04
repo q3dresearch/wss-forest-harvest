@@ -1,6 +1,8 @@
 {
   "cadence": "weekly",
   "completed_at": "2026-09-04T12:05:54Z",
+  "run_id": "33869919780",
+  "workflow": "capture-weekly",
   "outcomes": {
     "first_capture": 14
   },
