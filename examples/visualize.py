@@ -9,6 +9,7 @@
   cohort-approval.svg    share of each filing year that reached approval
   geography.svg          does latitude or harvest intensity explain the rate?
   status-changes.svg     which plans changed status between captures
+  deletion-clock.svg     Swedish notification cohorts against the five-year window
 
 Rates need a denominator, and the denominator is CAL FIRE's permanent THP
 archive — cited, not captured. reference/ holds a committed summary of it so
@@ -506,6 +507,75 @@ def chart_pipeline_watch(data):
     save(p, "pipeline-watch.svg")
 
 
+def chart_deletion_clock(snap):
+    """Sweden: what the five-year rolling window is about to erase."""
+    # entities are cohort:se:<county>:<case year>:<YYYY-MM>
+    years = defaultdict(lambda: [0, 0.0, 0])     # [notices, ha, outcome recorded]
+    for e, v in snap.items():
+        if not e.startswith("cohort:se:"):
+            continue
+        parts = e.split(":")
+        if len(parts) < 5:
+            continue
+        try:
+            y = int(parts[3])
+        except ValueError:
+            continue
+        years[y][0] += int(float(v.get("notices") or 0))
+        years[y][1] += float(v.get("notified_ha") or 0)
+        years[y][2] += int(float(v.get("with_outcome") or 0))
+    if not years:
+        return
+    ks = sorted(years)
+    W, H = 1000, 540
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+         f'<rect width="{W}" height="{H}" fill="{SURFACE}"/>',
+         T(38, 46, "Sweden deletes its harvest intentions after about five years", 21, INK, weight="600"),
+         T(38, 70, "Notifications held today, by the year the case was filed. Performed harvest is kept "
+                   "back to 1979; this is not.", 13.5, INK2),
+         T(38, 90, f"The {ks[0]} cohort — {years[ks[0]][0]:,} notices, {years[ks[0]][1]:,.0f} ha — is the next "
+                   "to age out.", 11.5, ORANGE)]
+    x0, y0, pw, ph = 70, 148, 590, 210
+    mx = max(v[0] for v in years.values()) or 1
+    p.append(f'<line x1="{x0}" y1="{y0+ph}" x2="{x0+pw}" y2="{y0+ph}" stroke="{BASE}"/>')
+    bw = pw / len(ks) * 0.58
+    for i, k in enumerate(ks):
+        n, ha, done = years[k]
+        cx = x0 + pw * (i + 0.5) / len(ks)
+        h = ph * n / mx
+        col = ORANGE if k == ks[0] else BLUE
+        p.append(f'<rect x="{cx-bw/2:.1f}" y="{y0+ph-h:.1f}" width="{bw:.1f}" height="{h:.1f}" fill="{col}"/>')
+        hd = ph * done / mx
+        p.append(f'<rect x="{cx-bw/2:.1f}" y="{y0+ph-hd:.1f}" width="{bw:.1f}" height="{hd:.1f}" '
+                 f'fill="{VIOLET}" fill-opacity="0.75"/>')
+        p.append(T(cx, y0+ph-h-8, f"{n:,}", 11, INK, anchor="middle", weight="600", tab=True))
+        p.append(T(cx, y0+ph+18, str(k), 11.5, INK2, anchor="middle", tab=True))
+        p.append(T(cx, y0+ph+33, f"{ha:,.0f} ha", 9.5, MUTED, anchor="middle", tab=True))
+    ly = y0 + ph + 62
+    for col, lab in ((BLUE, "notifications held"), (VIOLET, "of which an outcome is recorded"),
+                     (ORANGE, "next cohort to be deleted")):
+        p.append(f'<rect x="{x0}" y="{ly}" width="11" height="11" fill="{col}"/>')
+        p.append(T(x0 + 18, ly + 10, lab, 12, INK2))
+        ly += 20
+    lx = x0 + pw + 34
+    for i, line in enumerate([
+            "'Outcome recorded' is not a",
+            "completion rate. 95,315 of the",
+            "128,192 notices read 'Uppgift",
+            "saknas' — the outcome is",
+            "unknown, not absent.",
+            "",
+            "And the performed-harvest layer",
+            "cannot be joined: it redacts its",
+            "own case number to 'Visas ej'.",
+            "",
+            "Every notice is preserved in",
+            "raw/; this table is a cohort",
+            "view, not a copy of 128k rows."]):
+        p.append(T(lx, y0 + 10 + i * 19, line, 11.5, INK2 if line else MUTED))
+    save(p, "deletion-clock.svg")
+
+
 def main():
     data = observations()
     if not data:
@@ -519,6 +589,7 @@ def main():
     chart_cohorts(data[latest], arch)
     chart_geography(data[latest], arch, counties)
     chart_pipeline_watch(data)
+    chart_deletion_clock(data[latest])
     chart_changes(data)
 
 

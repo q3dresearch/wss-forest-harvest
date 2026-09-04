@@ -1,0 +1,716 @@
+# Field shape verified against the live service on 2026-09-04.
+source_id: skogsstyrelsen.harvest.notified
+status: active
+cadence: monthly
+schema_id: harvest.notified.v1
+
+publisher: Skogsstyrelsen
+publisher_tier: first_party
+destroys_own_history: true
+licence: "Skogsstyrelsen open data (Geodataportalen); verify terms before redistributing"
+personal_data: none          # Beteckn is a case number; no holder or owner field exists
+storage: git
+
+notes: >-
+  Swedish harvest notifications — the intention to fell, filed before the work.
+  The reason this is captured and the performed-harvest layer is not: Sweden
+  keeps 1,381,643 performed-harvest records back to 1979, and keeps
+  notifications only from 2021. Intentions age out on roughly a five-year
+  rolling window; outcomes are kept for ever. A notification that never became
+  a harvest disappears with no trace.
+  Two things this source cannot do, both tested rather than assumed. There is
+  no join to the performed layer: it redacts Beteckn to 'Visas ej'. And AvvHa
+  is not a completion rate — 95,315 of 128,192 rows read 'Uppgift saknas',
+  meaning the outcome is unknown, not that no harvest happened.
+  Partitioned by county and case year, with bi-monthly or quarterly bands where
+  a cell would approach the 2,000-feature cap. orderByFields is mandatory: the
+  service returns rows in a different order on every request, so without it the
+  payload hash changes each capture and dedup never fires.
+
+endpoints:
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-03-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-03-01%27+AND+Inkomdatum+%3C+DATE+%272026-05-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-05-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-09-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-09-01%27+AND+Inkomdatum+%3C+DATE+%272026-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-03-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-03-01%27+AND+Inkomdatum+%3C+DATE+%272025-05-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-05-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-09-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-09-01%27+AND+Inkomdatum+%3C+DATE+%272025-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-03-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-03-01%27+AND+Inkomdatum+%3C+DATE+%272025-05-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-05-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-09-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-09-01%27+AND+Inkomdatum+%3C+DATE+%272025-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-03-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-03-01%27+AND+Inkomdatum+%3C+DATE+%272026-05-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-05-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-09-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-09-01%27+AND+Inkomdatum+%3C+DATE+%272026-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-03-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-03-01%27+AND+Inkomdatum+%3C+DATE+%272025-05-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-05-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-09-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-09-01%27+AND+Inkomdatum+%3C+DATE+%272025-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-11-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-04-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-04-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3C+DATE+%272023-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-04-01%27+AND+Inkomdatum+%3C+DATE+%272023-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-07-01%27+AND+Inkomdatum+%3C+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-04-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-04-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-04-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3C+DATE+%272024-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-04-01%27+AND+Inkomdatum+%3C+DATE+%272024-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-07-01%27+AND+Inkomdatum+%3C+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-04-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-04-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3C+DATE+%272022-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3E%3D+DATE+%272022-04-01%27+AND+Inkomdatum+%3C+DATE+%272022-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3E%3D+DATE+%272022-07-01%27+AND+Inkomdatum+%3C+DATE+%272022-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3E%3D+DATE+%272022-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-04-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-04-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3C+DATE+%272023-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-04-01%27+AND+Inkomdatum+%3C+DATE+%272023-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-07-01%27+AND+Inkomdatum+%3C+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-04-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3C+DATE+%272024-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-04-01%27+AND+Inkomdatum+%3C+DATE+%272024-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-07-01%27+AND+Inkomdatum+%3C+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3C+DATE+%272024-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-04-01%27+AND+Inkomdatum+%3C+DATE+%272024-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-07-01%27+AND+Inkomdatum+%3C+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3C+DATE+%272024-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-04-01%27+AND+Inkomdatum+%3C+DATE+%272024-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-07-01%27+AND+Inkomdatum+%3C+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-04-01%27+AND+Inkomdatum+%3C+DATE+%272026-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-07-01%27+AND+Inkomdatum+%3C+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3E%3D+DATE+%272026-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3C+DATE+%272023-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-04-01%27+AND+Inkomdatum+%3C+DATE+%272023-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-07-01%27+AND+Inkomdatum+%3C+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3C+DATE+%272023-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-04-01%27+AND+Inkomdatum+%3C+DATE+%272023-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-07-01%27+AND+Inkomdatum+%3C+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3C+DATE+%272024-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-04-01%27+AND+Inkomdatum+%3C+DATE+%272024-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-07-01%27+AND+Inkomdatum+%3C+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3C+DATE+%272024-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-04-01%27+AND+Inkomdatum+%3C+DATE+%272024-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-07-01%27+AND+Inkomdatum+%3C+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2024+AND+Inkomdatum+%3E%3D+DATE+%272024-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3C+DATE+%272022-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3E%3D+DATE+%272022-04-01%27+AND+Inkomdatum+%3C+DATE+%272022-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3E%3D+DATE+%272022-07-01%27+AND+Inkomdatum+%3C+DATE+%272022-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2022+AND+Inkomdatum+%3E%3D+DATE+%272022-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3C+DATE+%272025-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-04-01%27+AND+Inkomdatum+%3C+DATE+%272025-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-07-01%27+AND+Inkomdatum+%3C+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2025+AND+Inkomdatum+%3E%3D+DATE+%272025-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3C+DATE+%272023-04-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-04-01%27+AND+Inkomdatum+%3C+DATE+%272023-07-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-07-01%27+AND+Inkomdatum+%3C+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2023+AND+Inkomdatum+%3E%3D+DATE+%272023-10-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2705%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2707%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2705%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2712%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2707%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2707%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2712%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2705%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2705%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2712%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2707%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2704%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2705%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2707%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2714%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2704%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2718%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2703%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2703%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2718%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2718%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2712%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2712%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2713%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2718%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2717%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2713%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2703%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2703%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2718%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2713%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2710%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2722%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2719%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2704%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2704%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2701%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2713%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2713%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2701%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2719%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2703%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2704%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2719%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2710%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2708%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2706%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2719%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2723%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2720%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2710%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2724%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2701%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2705%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2719%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2707%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2701%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2710%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2704%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2710%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2725%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2701%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2718%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2712%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2703%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2713%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2719%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2701%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2710%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2709%27+AND+ArendeAr%3D2023&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2709%27+AND+ArendeAr%3D2024&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2709%27+AND+ArendeAr%3D2025&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2709%27+AND+ArendeAr%3D2026&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2709%27+AND+ArendeAr%3D2022&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+  - url: "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2709%27+AND+ArendeAr%3D2021&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    delay_seconds: 2
+    timeout_seconds: 120
+
+gates:
+  expect_status: 200
+  min_bytes: 400
+  content_type_any: [json]
+  must_contain: ["Beteckn"]
+  must_not_contain: ['exceededTransferLimit":true', "Unable to complete operation"]
+  max_shrink_pct: 50
