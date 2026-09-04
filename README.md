@@ -18,90 +18,106 @@
 </p>
 
 CAL FIRE publishes every proposed timber harvest plan with a status of
-**Proposed, Withdrawn or Denied**. It has no `timeInfo`, no historic-moment
-support and no dated snapshots.
+**Proposed, Withdrawn or Denied**, and no `timeInfo`, historic-moment support
+or dated snapshots.
 
 At the first capture (4 September 2026) the layer held **217 plans** across
 4,486 polygons: 149 Proposed, 67 Withdrawn, 1 Denied.
 
-**Read that split carefully — it is two different populations.** The Proposed
-plans are almost all current (141 of 149 filed in 2025–26). The Withdrawn ones
-are a *retained back-catalogue* stretching to filing year 2015. Dividing one by
-the other gives a withdrawal "rate" that means nothing, and an earlier version
-of this README did exactly that.
-
-Measured against CAL FIRE's permanent archive — roughly 5,000 polygons, about
-250 plans, per filing year — the retained withdrawals run 1 to 13 plans a year.
-**Withdrawal is rare, not common.**
+**Read that split carefully — it is two populations.** The Proposed plans are
+almost all current (141 of 149 filed in 2025–26). The Withdrawn ones are a
+*retained back-catalogue* reaching filing year 2015. Dividing one by the other
+gives a withdrawal "rate" that means nothing, and an earlier version of this
+README did exactly that.
 
 ## What it shows today
+
+Everything in this section comes from **one download**. None of it needs the
+archive.
 
 ![Where California proposes to cut](examples/charts/harvest-map.svg)
 
 ![When withdrawn plans died](examples/charts/withdrawal-record.svg)
 
-**Both of these need no archive.** CAL FIRE's own `COMMENTS` field dates 44 of
-the 67 withdrawals and names a replacement plan on 13, so the timeline above
-comes out of a single download. That is the honest starting point, and
-[research questions](docs/research-questions.md) sets out which questions
-actually require repeated capture — there are four, and one of them carries
-most of the weight.
+CAL FIRE's own `COMMENTS` field dates 44 of the 67 withdrawals, gives a reason
+on many (*"Withdrawn before approval 10/20/2020 due to Castle Fire"*) and names
+a replacement plan on 13 — so a withdrawal is often a refiling, not a death.
 
-## What it cannot show yet
+![Withdrawal rate by county](examples/charts/county-risk.svg)
 
-![Which plans changed status](examples/charts/status-changes.svg)
+**Raw counts mislead.** Mendocino has the most withdrawals, at a 2.9% rate;
+Sonoma has a sixth as many at **14.6%**. The denominator is CAL FIRE's
+permanent archive, joined on `HD_NUM`. Violet shows the rate after removing
+refilings.
 
-A withdrawal is deleted from the public record; the archive is the only place
-it survives. That chart fills itself in at the second capture — re-run
-[`examples/visualize.py`](examples/visualize.py).
+![Approval rate by filing year](examples/charts/cohort-approval.svg)
+
+![Geography against withdrawal rate](examples/charts/geography.svg)
+
+Latitude and harvest intensity both correlate weakly and negatively with the
+withdrawal rate (**r = −0.40** and **−0.32**), but with 16 counties neither
+survives a significance test. Population, income, elevation and rainfall are
+untested rather than ruled out — the Census API needs a key.
+
+## What only repeated capture can answer
+
+![What only the archive can answer](examples/charts/pipeline-watch.svg)
+
+Four questions, and the strongest is speculative: the withdrawal back-catalogue
+is retained *today* and nothing guarantees it will be. If CAL FIRE ever purges
+it, this becomes the only record. The first months of capture are the test.
+
+[Research questions](docs/research-questions.md) sets out all twelve, which six
+need no archive, and the fact that this repository was published before that
+analysis was done.
 
 ## Should you fork this?
 
 **Yes, if** you want a dated record of which harvest proposals die before
-approval — forest policy, watershed and habitat work, or a worked example of
-mapping polygons with no GIS stack at all.
+approval, or a worked example of mapping polygons with no GIS stack at all.
 
 **No, if** you need:
 
 | you need | status |
 | --- | --- |
-| Why a plan was withdrawn | often available — `COMMENTS` covers 88% of withdrawn plans |
-| Most of the analysis | **needs no archive** — six of twelve questions come from one download |
-| Volume harvested, or what was actually cut | **never** — this is the proposal stage |
-| Approved and completed plans | already archived by CAL FIRE — cite their THP layer |
+| Most of the analysis above | **it needs no archive** — six of twelve questions come from one download |
+| Volume harvested, or what was cut | **never** — this is the proposal stage |
 | Landowner or timber-owner names | not in this layer, deliberately |
+| Approved and completed plans | already archived by CAL FIRE — cited in `reference/` |
 | Anywhere outside California | one state, one regulator |
 | History before September 2026 | impossible — nobody kept it |
 
 **Cost:** one Actions job a week, 14 polite GETs against one state host, about
-**2.2 MB raw and 0.2 MB derived per capture**. No key, no account.
+**2.2 MB raw and 0.4 MB derived per capture**. No key, no account.
 
 ## How it works
 
-One observation per **plan**, not per polygon. The service returns one row per
-polygon and a plan carries many — 4,486 polygons were 217 plans at first
-capture, so anything counted per row is out by roughly twenty.
+One observation per **plan**, not per polygon — 4,486 polygons were 217 plans,
+so anything counted per row is out by roughly twenty.
 
 **Geometry is requested but never enters the observation table.** Endpoints ask
-for `outSR=4326` and `maxAllowableOffset=0.0002`, which generalises polygons
-server-side to about 22 m — 1.78 MB down to 291 KB per partition with a median
-of 9 vertices and *no* polygon lost. Shapes live in `raw/`; status history
-lives in `derived/`; the chart script joins them.
+for `outSR=4326` and `maxAllowableOffset=0.0002`, generalising polygons
+server-side to ~22 m: 1.78 MB down to 291 KB per partition, median 42 → 9
+vertices, and no polygon lost. Shapes live in `raw/`, status in `derived/`, and
+`examples/visualize.py` joins them.
 
-**No GIS dependency, anywhere.** Because the service returns WGS84 already, a
-map is lon/lat → x/y and an SVG `<path>`. No shapefile reader, no reprojection,
-no basemap package, no plotting library — the whole fleet stays stdlib-only,
-and a timelapse is just one panel per `observed_at`.
+**No GIS dependency, anywhere.** The service returns WGS84, so a map is
+lon/lat → x/y and an SVG `<path>`. No shapefile reader, no reprojection, no
+basemap, no plotting library. A timelapse is one panel per `observed_at`.
 
 **`observed_at` is pinned to the capture date.** This source publishes no "as
 of" stamp, so derive would otherwise date each observation by the second its
-partition was fetched, and one capture would arrive as fourteen snapshots
-seconds apart. The parser reads the date from the raw filename instead, so a
-run is one snapshot.
+partition was fetched — one capture arriving as fourteen snapshots seconds
+apart. The parser reads the date from the raw filename instead.
+
+**Denominators are cited, not captured.** `reference/` holds a committed
+summary of CAL FIRE's permanent THP layer and the Census county gazetteer, both
+of which keep their own history. `examples/refresh_reference.py` rebuilds them.
+Committing the summary keeps every chart deterministic and offline.
 
 **Completeness is asserted, not assumed.** The service caps a response at 2,000
-features and says so in the payload while still returning HTTP 200. Partitions
-are `HD_NUM` string ranges — a business key, not a surrogate id — sized so the
+features and says so in the payload while returning HTTP 200. Partitions are
+`HD_NUM` string ranges — a business key, not a surrogate id — sized so the
 largest holds 1,088. A gate fails the capture if any response reports
 truncation.
 

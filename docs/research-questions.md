@@ -32,14 +32,14 @@ The README previously claimed there was no reason field. There is.
 
 ## Answerable from one download — no archive needed
 
-| # | question | source |
-| --- | --- | --- |
-| 1 | When were plans withdrawn, and in which years did that spike? | `COMMENTS` dates (44 of 67) |
-| 2 | Which counties withdraw most? | county from `HD_NUM` — Mendocino 13, Humboldt 10, Plumas 6 |
-| 3 | Which silvicultural methods are withdrawn disproportionately? | `SILVI_1`, 22 values |
-| 4 | How often is a withdrawal really a refiling? | `resubmitted_as` — 19% |
-| 5 | What share of a filing cohort was approved? | join `HD_NUM` to the permanent THP layer |
-| 6 | Where is harvest concentrated, and where does it fail? | geometry |
+| # | question | answered by | finding |
+| --- | --- | --- | --- |
+| 1 | When were plans withdrawn? | `withdrawal-record.svg` | peaks in 2020 and 2022 |
+| 2 | Which counties have the highest withdrawal rate? | `county-risk.svg` | **Sonoma 14.6%, Humboldt 1.4%** — the county with the most withdrawals has nearly the lowest rate |
+| 3 | Which withdrawals are really refilings? | `county-risk.svg` (violet) | 13 of 67; Plumas drops 9.0% → 7.6%, Butte and Tuolumne to zero |
+| 4 | How often overall? | same | 19% of withdrawals name a replacement |
+| 5 | What share of a filing cohort is approved? | `cohort-approval.svg` | **roughly 97 in 100** |
+| 6 | Does geography explain any of it? | `geography.svg` | latitude r = −0.40, harvest intensity r = −0.32 — weak, not significant at n=16 |
 
 **Six of the twelve questions below need no capture at all.** They are a larder
 recipe, and pretending otherwise would be dishonest.
@@ -49,9 +49,26 @@ recipe, and pretending otherwise would be dishonest.
 | # | question | why capture is required |
 | --- | --- | --- |
 | 7 | How long does a plan sit in Proposed before it resolves? | `COMMENTS` dates the withdrawal but nothing dates the proposal |
-| 8 | Which plans vanish with no trace in either the archive or the withdrawn set? | only visible as a disappearance between captures |
+| 8 | Which plans vanish with no trace in either register? | only visible as a disappearance between captures |
 | 9 | **Does CAL FIRE ever purge the withdrawal back-catalogue?** | if it does, this repository becomes the only record of it |
 | 10 | Do plan boundaries change between proposal and approval? | geometry is overwritten in place |
+
+Progress against all four is drawn in `pipeline-watch.svg`, which counts
+captures rather than pretending to answers.
+
+## Denominators
+
+Rates need a base, and the base is CAL FIRE's permanent THP layer joined on
+`HD_NUM`, plus the Census county gazetteer for land area and centroid. Both
+keep their own history, so `reference/` holds a committed *summary* rather than
+a mirror — regenerate with `examples/refresh_reference.py`.
+
+Two caveats travel with every rate here:
+
+- The retained withdrawal set may be incomplete, so each rate is a **lower
+  bound**.
+- One county code (`MOO`, 4 plans of 3,406) does not match the gazetteer and is
+  excluded rather than guessed at.
 
 Question 9 is the strongest justification and also the most speculative: the
 back-catalogue is retained *today*, and nothing guarantees it will be. The

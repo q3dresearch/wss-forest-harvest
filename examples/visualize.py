@@ -5,7 +5,14 @@
 
   harvest-map.svg        where plans sit, coloured by status, with real polygons
   withdrawal-record.svg  when plans were withdrawn, and why — from COMMENTS
+  county-risk.svg        withdrawal rate by county, net of resubmission
+  cohort-approval.svg    share of each filing year that reached approval
+  geography.svg          does latitude or harvest intensity explain the rate?
   status-changes.svg     which plans changed status between captures
+
+Rates need a denominator, and the denominator is CAL FIRE's permanent THP
+archive — cited, not captured. reference/ holds a committed summary of it so
+these charts stay deterministic and offline; refresh_reference.py rebuilds it.
 
 Geometry comes from the raw archive (already WGS84 — the endpoints request
 outSR=4326), status from derived/observations. So a map is nothing more than
@@ -25,7 +32,7 @@ from xml.sax.saxutils import escape
 REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "examples" / "charts"
 SURFACE, INK, INK2, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#898781"
-GRID, ORANGE, BLUE, VIOLET = "#e1e0d9", "#eb6834", "#2a78d6", "#4a3aa7"
+GRID, BASE, ORANGE, BLUE, VIOLET = "#e1e0d9", "#c3c2b7", "#eb6834", "#2a78d6", "#4a3aa7"
 FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif'
 COLOR = {"Proposed": BLUE, "Withdrawn": ORANGE, "Denied": VIOLET}
 
@@ -41,6 +48,38 @@ def save(parts, name):
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / name).write_text("\n".join(parts), encoding="utf-8")
     print(f"  wrote examples/charts/{name}")
+
+
+def reference():
+    """Denominators: approved plans per county/year, and county geography."""
+    arch, counties = defaultdict(int), {}
+    ref = REPO / "reference"
+    f = ref / "thp-archive-counts.csv"
+    if f.exists():
+        for r in csv.DictReader(f.open(encoding="utf-8")):
+            try:
+                y = int(r["filed_year"])
+            except (TypeError, ValueError):
+                continue
+            arch[(r["county"], y)] += int(r["plans"])
+    f = ref / "ca-counties.csv"
+    if f.exists():
+        for r in csv.DictReader(f.open(encoding="utf-8")):
+            counties[r["code"]] = r
+    return arch, counties
+
+
+def plans_from(snap):
+    """[(county, filed_year, status, resubmitted, acres)] for one snapshot."""
+    out = []
+    for v in snap.values():
+        try:
+            y = int(v.get("filed_year") or 0)
+        except ValueError:
+            y = 0
+        out.append((v.get("county"), y, v.get("status"),
+                    bool(v.get("resubmitted_as")), float(v.get("acres") or 0)))
+    return out
 
 
 def observations():
@@ -247,14 +286,239 @@ def chart_withdrawals(snap):
     save(p, "withdrawal-record.svg")
 
 
+def chart_county_risk(snap, arch, counties):
+    """Q2/Q3: withdrawal rate with a real denominator, and the resubmission share."""
+    rows = plans_from(snap)
+    wd, rs = defaultdict(int), defaultdict(int)
+    for c, y, st, resub, _ in rows:
+        if not c or not (2015 <= y <= 2026) or st not in ("Withdrawn", "Denied"):
+            continue
+        wd[c] += 1
+        if resub:
+            rs[c] += 1
+    app = defaultdict(int)
+    for (c, y), n in arch.items():
+        if 2015 <= y <= 2026:
+            app[c] += n
+    data = []
+    for c in set(list(wd) + list(app)):
+        a, w = app[c], wd[c]
+        if a + w < 25:                       # too few to rate honestly
+            continue
+        net = w - rs[c]
+        data.append((c, a, w, rs[c], w / (a + w) * 100, net / (a + net) * 100 if a + net else 0))
+    data.sort(key=lambda t: -t[4])
+    W, H = 940, 150 + 26 * len(data) + 96
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+         f'<rect width="{W}" height="{H}" fill="{SURFACE}"/>',
+         T(38, 46, "The county with the most withdrawals has one of the lowest rates", 21, INK, weight="600"),
+         T(38, 70, "Withdrawn or denied plans as a share of all resolved plans filed 2015-26, by county.", 13.5, INK2),
+         T(38, 90, "Denominator is CAL FIRE's permanent archive. Counties with fewer than 25 resolved plans are omitted.",
+           11.5, MUTED)]
+    x0, bw = 210, 300
+    mx = max(d[4] for d in data) or 1
+    p += [T(x0, 124, "WITHDRAWAL RATE", 10, MUTED, weight="600"),
+          T(x0 + bw + 116, 124, "APPROVED", 10, BLUE, anchor="end", weight="600"),
+          T(x0 + bw + 196, 124, "WITHDRAWN", 10, ORANGE, anchor="end", weight="600"),
+          T(x0 + bw + 292, 124, "NET OF RESUB", 10, MUTED, anchor="end", weight="600")]
+    y = 132
+    for c, a, w, r_, raw, net in data:
+        nm = counties.get(c, {}).get("name", c)
+        p.append(T(x0 - 14, y + 16, f"{nm} ({c})"[:26], 12.5, INK, anchor="end"))
+        p.append(f'<rect x="{x0}" y="{y+5}" width="{bw*raw/mx:.1f}" height="15" fill="{ORANGE}"/>')
+        if net > 0:
+            p.append(f'<rect x="{x0}" y="{y+5}" width="{bw*net/mx:.1f}" height="15" fill="{VIOLET}" fill-opacity="0.85"/>')
+        p.append(T(x0 + bw * raw / mx + 7, y + 16.5, f"{raw:.1f}%", 11.5, INK2, weight="600", tab=True))
+        p.append(T(x0 + bw + 116, y + 16.5, f"{a:,}", 12, INK2, anchor="end", tab=True))
+        p.append(T(x0 + bw + 196, y + 16.5, f"{w}", 12, INK2, anchor="end", tab=True))
+        p.append(T(x0 + bw + 292, y + 16.5, f"{net:.1f}%", 12, VIOLET if r_ else MUTED, anchor="end", tab=True))
+        y += 26
+    # derive the contrast from the data rather than restating it by hand
+    big = max(data, key=lambda d: d[1])
+    worst = data[0]
+    p.append(T(38, y + 30,
+               f"{counties.get(big[0],{}).get('name',big[0])} resolves {big[1]+big[2]:,} plans and loses "
+               f"{big[2]} — {big[4]:.1f}%. "
+               f"{counties.get(worst[0],{}).get('name',worst[0])} resolves {worst[1]+worst[2]} and loses "
+               f"{worst[2]}, which is {worst[4]:.1f}%.", 12, INK2))
+    p.append(T(38, y + 50, "Violet is the rate after removing withdrawals that name a replacement plan: those "
+                           "are refilings, not failures.", 11.5, MUTED))
+    p.append(T(38, y + 72, "The retained withdrawal set may be incomplete, so every rate here is a lower bound.",
+               11.5, MUTED))
+    save(p, "county-risk.svg")
+
+
+def chart_cohorts(snap, arch):
+    """Q5: what share of each filing year resolved as approved."""
+    rows = plans_from(snap)
+    wd = defaultdict(int)
+    for _, y, st, _, _ in rows:
+        if 2015 <= y <= 2026 and st in ("Withdrawn", "Denied"):
+            wd[y] += 1
+    app = defaultdict(int)
+    for (c, y), n in arch.items():
+        if 2015 <= y <= 2026:
+            app[y] += n
+    ks = sorted(set(list(wd) + list(app)))
+    W, H = 900, 480
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+         f'<rect width="{W}" height="{H}" fill="{SURFACE}"/>',
+         T(38, 46, "Roughly 97 in 100 filed plans reach approval", 21, INK, weight="600"),
+         T(38, 70, "Plans filed each year, split by how they resolved. Approved from the permanent archive; "
+                   "withdrawn from this capture.", 13.5, INK2),
+         T(38, 90, "2026 is incomplete — most of its plans have not resolved yet.", 11.5, MUTED)]
+    x0, y0, pw, ph = 70, 140, 790, 200
+    mx = max(app[k] + wd[k] for k in ks) or 1
+    bw = pw / len(ks) * 0.6
+    for i, k in enumerate(ks):
+        a, w = app[k], wd[k]
+        cx = x0 + pw * (i + 0.5) / len(ks)
+        ha, hw = ph * a / mx, ph * w / mx
+        p.append(f'<rect x="{cx-bw/2:.1f}" y="{y0+ph-ha:.1f}" width="{bw:.1f}" height="{ha:.1f}" fill="{BLUE}"/>')
+        p.append(f'<rect x="{cx-bw/2:.1f}" y="{y0+ph-ha-hw:.1f}" width="{bw:.1f}" height="{hw:.1f}" fill="{ORANGE}"/>')
+        rate = w / (a + w) * 100 if a + w else 0
+        p.append(T(cx, y0+ph-ha-hw-7, f"{rate:.1f}%", 10.5, ORANGE, anchor="middle", weight="600", tab=True))
+        p.append(T(cx, y0+ph+18, str(k), 10.5, INK2, anchor="middle", tab=True))
+        p.append(T(cx, y0+ph+33, f"{a+w:,}", 9.5, MUTED, anchor="middle", tab=True))
+    p.append(f'<rect x="{x0}" y="{y0+ph+52}" width="11" height="11" fill="{BLUE}"/>')
+    p.append(T(x0+18, y0+ph+62, "approved or completed", 12, INK2))
+    p.append(f'<rect x="{x0+210}" y="{y0+ph+52}" width="11" height="11" fill="{ORANGE}"/>')
+    p.append(T(x0+228, y0+ph+62, "withdrawn or denied (percentage shown above each bar)", 12, INK2))
+    p.append(T(38, H-26, "This is the question the archive was supposed to answer, and it is already answerable "
+                         "from one download.", 11.5, MUTED))
+    save(p, "cohort-approval.svg")
+
+
+def chart_geography(snap, arch, counties):
+    """Q6: does latitude or harvest intensity explain withdrawal rate?"""
+    rows = plans_from(snap)
+    wd = defaultdict(int)
+    for c, y, st, _, _ in rows:
+        if c and 2015 <= y <= 2026 and st in ("Withdrawn", "Denied"):
+            wd[c] += 1
+    app = defaultdict(int)
+    for (c, y), n in arch.items():
+        if 2015 <= y <= 2026:
+            app[c] += n
+    pts = []
+    for c in set(list(wd) + list(app)):
+        a, w = app[c], wd[c]
+        r = counties.get(c)
+        if a + w < 25 or not r:
+            continue
+        try:
+            lat, area = float(r["centroid_lat"]), float(r["land_sqmi"])
+        except (TypeError, ValueError):
+            continue
+        pts.append((c, r["name"], lat, (a + w) / area * 1000, w / (a + w) * 100, a + w))
+    if not pts:
+        return
+    W, H = 940, 480
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+         f'<rect width="{W}" height="{H}" fill="{SURFACE}"/>',
+         T(38, 46, "Northern counties withdraw slightly less — but not enough to trust", 21, INK, weight="600"),
+         T(38, 70, "Withdrawal rate against county centroid latitude. Bubble area is plans resolved.", 13.5, INK2),
+         T(38, 90, "n = " + str(len(pts)) + " counties. Both correlations are weak and neither would survive "
+                   "a significance test at this size.", 11.5, MUTED)]
+    x0, y0, pw, ph = 80, 140, 600, 280
+    lo, hi = min(q[2] for q in pts), max(q[2] for q in pts)
+    ymx = max(q[4] for q in pts) * 1.15
+    p.append(f'<line x1="{x0}" y1="{y0+ph}" x2="{x0+pw}" y2="{y0+ph}" stroke="{BASE}"/>')
+    p.append(f'<line x1="{x0}" y1="{y0}" x2="{x0}" y2="{y0+ph}" stroke="{BASE}"/>')
+    for frac in (0, .25, .5, .75, 1):
+        yy = y0 + ph - ph * frac
+        p.append(f'<line x1="{x0}" y1="{yy:.1f}" x2="{x0+pw}" y2="{yy:.1f}" stroke="{GRID}"/>')
+        p.append(T(x0-10, yy+4, f"{ymx*frac:.0f}%", 11, MUTED, anchor="end", tab=True))
+    for frac in (0, .5, 1):
+        xx = x0 + pw * frac
+        p.append(T(xx, y0+ph+20, f"{lo + (hi-lo)*frac:.1f}°N", 11, MUTED, anchor="middle", tab=True))
+    placed = []
+    for c, nm, lat, dens, rate, n in sorted(pts, key=lambda q: -q[5]):
+        x = x0 + (lat - lo) / (hi - lo) * pw
+        y = y0 + ph - rate / ymx * ph
+        r = max(4, min(20, math.sqrt(n) * 0.7))
+        p.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{BLUE}" fill-opacity="0.45"/>')
+        if n > 100 or rate > 5:
+            # nudge alternate labels so neighbours do not overprint
+            dy = 4 if (len(placed) % 2 == 0) else -9
+            if all(abs(x - px) > 46 or abs(y + dy - py) > 11 for px, py in placed):
+                p.append(T(x + r + 4, y + dy, nm, 10.5, INK2))
+                placed.append((x, y + dy))
+    p.append(T(x0, y0+ph+46, "county centroid latitude — a proxy for California's north–south rainfall gradient",
+               11.5, MUTED))
+    def pearson(xs, ys):
+        n = len(xs)
+        if n < 3:
+            return None
+        mx, my = sum(xs) / n, sum(ys) / n
+        num = sum((a - mx) * (b - my) for a, b in zip(xs, ys))
+        dx = math.sqrt(sum((a - mx) ** 2 for a in xs))
+        dy = math.sqrt(sum((b - my) ** 2 for b in ys))
+        return num / (dx * dy) if dx and dy else None
+
+    rates = [q[4] for q in pts]
+    r_lat = pearson([q[2] for q in pts], rates)
+    r_den = pearson([q[3] for q in pts], rates)
+    lx = x0 + pw + 40
+    p.append(T(lx, y0 + 6, "WHAT THIS RULES OUT", 10, MUTED, weight="600"))
+    lines = [f"latitude vs rate      r = {r_lat:+.2f}" if r_lat is not None else "",
+             f"plans/1,000 sq mi     r = {r_den:+.2f}" if r_den is not None else "",
+             "",
+             "Both are weak, and with " + str(len(pts)) + " counties",
+             "neither would survive a",
+             "significance test. Read them as",
+             "'no visible effect', not as zero.",
+             "",
+             "Population, income, elevation and",
+             "rainfall need an API key or a",
+             "raster; untested, not ruled out."]
+    for i, line in enumerate(lines):
+        p.append(T(lx, y0 + 32 + i * 19, line, 12 if i > 1 else 12.5,
+                   INK if i < 2 else INK2, weight="600" if i < 2 else "normal", tab=i < 2))
+    save(p, "geography.svg")
+
+
+def chart_pipeline_watch(data):
+    """Q7-Q10: the questions that genuinely need repeated capture."""
+    W, H = 900, 400
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+         f'<rect width="{W}" height="{H}" fill="{SURFACE}"/>',
+         T(38, 46, "What only the archive can answer", 21, INK, weight="600"),
+         T(38, 70, "Four questions no single download reaches, and how far off each one is.", 13.5, INK2)]
+    n = len(data)
+    items = [("How long a plan sits in Proposed before resolving", 2),
+             ("Plans that vanish with no trace in either register", 2),
+             ("Whether CAL FIRE ever purges the withdrawal back-catalogue", 12),
+             ("Whether plan boundaries move between proposal and approval", 2)]
+    y = 116
+    for label, need in items:
+        done = min(n, need)
+        p.append(T(60, y + 14, label, 13, INK))
+        bx, bw2 = 640, 200
+        p.append(f'<rect x="{bx}" y="{y+3}" width="{bw2}" height="14" fill="#efeee9"/>')
+        p.append(f'<rect x="{bx}" y="{y+3}" width="{bw2*done/need:.1f}" height="14" fill="{ORANGE}"/>')
+        p.append(T(bx + bw2 + 10, y + 15, f"{done}/{need}", 11.5, INK2, tab=True))
+        y += 40
+    p.append(T(60, y + 24, "Everything else this repository shows comes from CAL FIRE's own fields and needs "
+                           "no archive at all.", 12, INK2))
+    p.append(T(60, y + 46, "That is the honest case: a thin capture wrapped around a strong one-download "
+                           "recipe.", 11.5, MUTED))
+    save(p, "pipeline-watch.svg")
+
+
 def main():
     data = observations()
     if not data:
         print("  no observations — run wss capture && wss derive")
         return
     latest = max(data)
+    arch, counties = reference()
     chart_map(polygons(), data[latest], latest[:10])
     chart_withdrawals(data[latest])
+    chart_county_risk(data[latest], arch, counties)
+    chart_cohorts(data[latest], arch)
+    chart_geography(data[latest], arch, counties)
+    chart_pipeline_watch(data)
     chart_changes(data)
 
 

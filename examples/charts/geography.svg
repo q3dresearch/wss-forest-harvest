@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="480" viewBox="0 0 940 480">
+<rect width="940" height="480" fill="#fcfcfb"/>
+<text x="38.0" y="46.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="21" fill="#0b0b0b" text-anchor="start" font-weight="600" style="">Northern counties withdraw slightly less — but not enough to trust</text>
+<text x="38.0" y="70.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="13.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Withdrawal rate against county centroid latitude. Bubble area is plans resolved.</text>
+<text x="38.0" y="90.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#898781" text-anchor="start" font-weight="normal" style="">n = 16 counties. Both correlations are weak and neither would survive a significance test at this size.</text>
+<line x1="80" y1="420" x2="680" y2="420" stroke="#c3c2b7"/>
+<line x1="80" y1="140" x2="80" y2="420" stroke="#c3c2b7"/>
+<line x1="80" y1="420.0" x2="680" y2="420.0" stroke="#e1e0d9"/>
+<text x="70.0" y="424.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0%</text>
+<line x1="80" y1="350.0" x2="680" y2="350.0" stroke="#e1e0d9"/>
+<text x="70.0" y="354.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">4%</text>
+<line x1="80" y1="280.0" x2="680" y2="280.0" stroke="#e1e0d9"/>
+<text x="70.0" y="284.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">8%</text>
+<line x1="80" y1="210.0" x2="680" y2="210.0" stroke="#e1e0d9"/>
+<text x="70.0" y="214.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">13%</text>
+<line x1="80" y1="140.0" x2="680" y2="140.0" stroke="#e1e0d9"/>
+<text x="70.0" y="144.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">17%</text>
+<text x="80.0" y="440.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="middle" font-weight="normal" style="font-variant-numeric: tabular-nums;">37.0°N</text>
+<text x="380.0" y="440.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="middle" font-weight="normal" style="font-variant-numeric: tabular-nums;">39.4°N</text>
+<text x="680.0" y="440.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11" fill="#898781" text-anchor="middle" font-weight="normal" style="font-variant-numeric: tabular-nums;">41.7°N</text>
+<circle cx="547.9" cy="397.3" r="18.9" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="570.8" y="401.3" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Humboldt</text>
+<circle cx="386.5" cy="372.1" r="14.9" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="405.4" y="363.1" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Mendocino</text>
+<circle cx="554.7" cy="388.8" r="10.2" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="659.5" cy="381.8" r="9.2" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="672.7" y="385.8" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Siskiyou</text>
+<circle cx="680.0" cy="400.1" r="9.0" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="540.4" cy="401.7" r="6.7" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="304.6" cy="395.5" r="5.8" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="457.4" cy="271.0" r="5.7" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="467.1" y="262.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Plumas</text>
+<circle cx="369.4" cy="391.3" r="5.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="549.0" cy="390.8" r="5.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="80.0" cy="332.4" r="5.3" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="89.3" y="336.4" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Santa Cruz</text>
+<circle cx="339.6" cy="316.0" r="4.8" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="348.4" y="307.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Placer</text>
+<circle cx="271.6" cy="176.5" r="4.5" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="280.1" y="180.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Sonoma</text>
+<circle cx="207.8" cy="362.6" r="4.0" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="416.0" cy="362.6" r="4.0" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="474.4" cy="296.8" r="4.0" fill="#2a78d6" fill-opacity="0.45"/>
+<text x="482.4" y="287.8" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Tehama</text>
+<text x="80.0" y="466.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#898781" text-anchor="start" font-weight="normal" style="">county centroid latitude — a proxy for California's north–south rainfall gradient</text>
+<text x="720.0" y="146.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="10" fill="#898781" text-anchor="start" font-weight="600" style="">WHAT THIS RULES OUT</text>
+<text x="720.0" y="172.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">latitude vs rate      r = -0.40</text>
+<text x="720.0" y="191.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">plans/1,000 sq mi     r = -0.32</text>
+<text x="720.0" y="210.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style=""></text>
+<text x="720.0" y="229.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">Both are weak, and with 16 counties</text>
+<text x="720.0" y="248.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">neither would survive a</text>
+<text x="720.0" y="267.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">significance test. Read them as</text>
+<text x="720.0" y="286.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">'no visible effect', not as zero.</text>
+<text x="720.0" y="305.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style=""></text>
+<text x="720.0" y="324.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">Population, income, elevation and</text>
+<text x="720.0" y="343.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">rainfall need an API key or a</text>
+<text x="720.0" y="362.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">raster; untested, not ruled out.</text>
+</svg>
