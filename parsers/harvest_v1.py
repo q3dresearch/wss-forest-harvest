@@ -30,11 +30,38 @@ from collections import defaultdict
 
 from wss import derive
 
-PARSER_VERSION = "2"
+PARSER_VERSION = "3"
 SCHEMA_ID = "harvest.v1"
 
 
 _STAMP = re.compile(r"/(\d{8})T\d{6}Z-")
+# HD_NUM is <region>-<year>-<seq>-<county>: it carries the filing year and the
+# county, both of which are analysis dimensions and neither of which exists as
+# its own field.
+_HD = re.compile(r"^(\d)-(\d{2})[A-Za-z]*-[^-]+-([A-Z]{3})$")
+# COMMENTS is semi-structured but consistent enough to mine: a withdrawal date
+# and, on about a third of withdrawn plans, the number it was refiled under.
+_WDATE = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{2,4})")
+_RESUB = re.compile(r"resub\w*(?:\s+as)?\s+([0-9]-[0-9]{2}[A-Za-z]*-[0-9]+-[A-Z]{3})", re.I)
+
+
+def _from_hd(hd):
+    m = _HD.match(hd)
+    if not m:
+        return None, None
+    y = int(m.group(2))
+    return (2000 + y if y < 90 else 1900 + y), m.group(3)
+
+
+def _withdrawn_on(comment):
+    m = _WDATE.search(comment or "")
+    if not m:
+        return None
+    mo, da, yr = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    yr = yr + 2000 if yr < 100 else yr
+    if not (1 <= mo <= 12 and 1 <= da <= 31 and 1990 <= yr <= 2100):
+        return None
+    return f"{yr:04d}-{mo:02d}-{da:02d}"
 
 
 def _observed_at(raw_ref):
@@ -75,7 +102,7 @@ def parse(payload, ctx):
         p["acres"] += _acres(a.get("GIS_ACRES"))
         p["polygons"] += 1
         # polygons of one plan share these; last non-empty wins
-        for k in ("PLAN_STAT", "REGION", "SILVI_1", "PROJECT_NAME"):
+        for k in ("PLAN_STAT", "REGION", "SILVI_1", "PROJECT_NAME", "COMMENTS"):
             v = _text(a.get(k))
             if v:
                 p["attrs"][k] = v
@@ -83,12 +110,20 @@ def parse(payload, ctx):
     for hd, p in plans.items():
         entity = f"plan:ca:{hd}"
         attrs = p["attrs"]
+        filed_year, county = _from_hd(hd)
+        comment = attrs.get("COMMENTS")
+        resub = _RESUB.search(comment or "")
         for metric, value, unit in (
             ("status", attrs.get("PLAN_STAT"), ""),
             ("region", attrs.get("REGION"), ""),
+            ("county", county, ""),
+            ("filed_year", filed_year, "year"),
             ("silviculture", attrs.get("SILVI_1"), ""),
             ("acres", round(p["acres"], 2), "acres"),
             ("polygons", p["polygons"], "count"),
+            ("note", comment, ""),
+            ("withdrawn_on", _withdrawn_on(comment), ""),
+            ("resubmitted_as", resub.group(1) if resub else None, ""),
         ):
             if value is None:
                 continue

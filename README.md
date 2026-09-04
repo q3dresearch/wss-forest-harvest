@@ -21,22 +21,31 @@ CAL FIRE publishes every proposed timber harvest plan with a status of
 **Proposed, Withdrawn or Denied**. It has no `timeInfo`, no historic-moment
 support and no dated snapshots.
 
-The permanent record does not keep the failures. CAL FIRE's archive holds
-76,967 approved and completed plans back to 2011 — but of **20 withdrawn plans
-sampled by `HD_NUM`, none appeared in it.** A third of proposed acreage is
-withdrawn, and that acreage is erased rather than archived.
+At the first capture (4 September 2026) the layer held **217 plans** across
+4,486 polygons: 149 Proposed, 67 Withdrawn, 1 Denied.
 
-At the first capture (4 September 2026):
+**Read that split carefully — it is two different populations.** The Proposed
+plans are almost all current (141 of 149 filed in 2025–26). The Withdrawn ones
+are a *retained back-catalogue* stretching to filing year 2015. Dividing one by
+the other gives a withdrawal "rate" that means nothing, and an earlier version
+of this README did exactly that.
 
-| status | plans | acres |
-| --- | --- | --- |
-| Proposed | 149 | 53,179 |
-| **Withdrawn** | **67** | **29,865** |
-| Denied | 1 | 153 |
+Measured against CAL FIRE's permanent archive — roughly 5,000 polygons, about
+250 plans, per filing year — the retained withdrawals run 1 to 13 plans a year.
+**Withdrawal is rare, not common.**
 
 ## What it shows today
 
 ![Where California proposes to cut](examples/charts/harvest-map.svg)
+
+![When withdrawn plans died](examples/charts/withdrawal-record.svg)
+
+**Both of these need no archive.** CAL FIRE's own `COMMENTS` field dates 44 of
+the 67 withdrawals and names a replacement plan on 13, so the timeline above
+comes out of a single download. That is the honest starting point, and
+[research questions](docs/research-questions.md) sets out which questions
+actually require repeated capture — there are four, and one of them carries
+most of the weight.
 
 ## What it cannot show yet
 
@@ -56,7 +65,8 @@ mapping polygons with no GIS stack at all.
 
 | you need | status |
 | --- | --- |
-| Why a plan was withdrawn | **never** — there is no reason field |
+| Why a plan was withdrawn | often available — `COMMENTS` covers 88% of withdrawn plans |
+| Most of the analysis | **needs no archive** — six of twelve questions come from one download |
 | Volume harvested, or what was actually cut | **never** — this is the proposal stage |
 | Approved and completed plans | already archived by CAL FIRE — cite their THP layer |
 | Landowner or timber-owner names | not in this layer, deliberately |

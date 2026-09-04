@@ -18,55 +18,60 @@ storage: git
 
 notes: >-
   Proposed timber harvest plans. PLAN_STAT is a three-state pipeline —
-  Proposed, Withdrawn, Denied — and the withdrawn population does not survive
-  into CAL FIRE's permanent 76,967-record THP archive: of 20 withdrawn plans
-  sampled by HD_NUM, none appeared there. A third of proposed acreage is
-  already withdrawn, and that acreage is being erased rather than archived.
-  Geometry is requested at ~22 m generalisation so maps are possible without
-  the archive carrying full-resolution polygons. Unlike the permanent THP
-  layer, this one has no LANDOWNER or TIMBEROWNR field, so no personal data.
+  Proposed, Withdrawn, Denied — and withdrawn plans do not appear in CAL FIRE's
+  permanent 76,967-record THP archive (20 sampled by HD_NUM, none found).
+  But this layer is NOT a clean current-state snapshot: it holds a live
+  pipeline (141 of 149 Proposed were filed 2025-26) alongside a retained
+  withdrawal back-catalogue reaching filing year 2015. Any ratio of the two is
+  meaningless. COMMENTS is the field that matters and was missed on the first
+  build: populated on 88% of withdrawn plans, it carries the withdrawal date,
+  the reason, and — on a third of them — the number the plan was resubmitted
+  under, so a withdrawal is often a refiling rather than a death.
+  Geometry is generalised to ~22 m so maps are possible without the archive
+  carrying full-resolution polygons. Unlike the permanent THP layer, this one
+  has no LANDOWNER or TIMBEROWNR field, so no personal data.
 
 endpoints:
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3C%271-2%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3C%271-2%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-2%27+AND+HD_NUM%3C%271-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-2%27+AND+HD_NUM%3C%271-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-25%27+AND+HD_NUM%3C%271-26%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-25%27+AND+HD_NUM%3C%271-26%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-26%27+AND+HD_NUM%3C%271-26-001%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-26%27+AND+HD_NUM%3C%271-26-001%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-26-001%27+AND+HD_NUM%3C%271-26-002%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-26-001%27+AND+HD_NUM%3C%271-26-002%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-26-002%27+AND+HD_NUM%3C%272%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%271-26-002%27+AND+HD_NUM%3C%272%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272%27+AND+HD_NUM%3C%272-20%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272%27+AND+HD_NUM%3C%272-20%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-20%27+AND+HD_NUM%3C%272-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-20%27+AND+HD_NUM%3C%272-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-25%27+AND+HD_NUM%3C%272-26%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-25%27+AND+HD_NUM%3C%272-26%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-26%27+AND+HD_NUM%3C%272-26-001%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-26%27+AND+HD_NUM%3C%272-26-001%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-26-001%27+AND+HD_NUM%3C%273%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%272-26-001%27+AND+HD_NUM%3C%273%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%273%27+AND+HD_NUM%3C%274%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%273%27+AND+HD_NUM%3C%274%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%274%27+AND+HD_NUM%3C%274-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%274%27+AND+HD_NUM%3C%274-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
-  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%274-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+  - url: "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3E%3D%274-25%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
     delay_seconds: 2
     timeout_seconds: 90
 

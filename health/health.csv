@@ -1,2 +1,2 @@
 source_id,first_success_at,last_success_at,last_attempt_at,consecutive_failures,expected_interval_h,staleness_h,gate_fail_rate_28d,status
-calfire.harvest.proposed,2026-09-04T09:57:17Z,2026-09-04T09:57:54Z,2026-09-04T09:57:54Z,0,168,0.0,0.000,active
+calfire.harvest.proposed,2026-09-04T09:57:17Z,2026-09-04T12:05:51Z,2026-09-04T12:05:51Z,0,168,0.0,0.000,active

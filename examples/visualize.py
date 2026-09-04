@@ -3,8 +3,9 @@
 
     python examples/visualize.py
 
-  harvest-map.svg      where plans sit, coloured by status, with real polygons
-  status-changes.svg   which plans changed status between captures
+  harvest-map.svg        where plans sit, coloured by status, with real polygons
+  withdrawal-record.svg  when plans were withdrawn, and why — from COMMENTS
+  status-changes.svg     which plans changed status between captures
 
 Geometry comes from the raw archive (already WGS84 — the endpoints request
 outSR=4326), status from derived/observations. So a map is nothing more than
@@ -162,8 +163,9 @@ def chart_map(polys, snap, as_of):
         p.append(T(IX + 190, ly + 8, f"{n:,} plan" + ("" if n == 1 else "s"), 12.5, INK2, anchor="end", tab=True))
         p.append(T(IX + 300, ly + 8, f"{tally[s][1]:,.0f} ac", 12.5, INK2, anchor="end", tab=True))
         ly += 24
-    p.append(T(IX, ly + 22, f"{tally['Withdrawn'][1]/total_ac*100:.0f}% of proposed acreage is already withdrawn,", 12.5, ORANGE, weight="600"))
-    p.append(T(IX, ly + 40, "and none of it reaches the permanent THP archive.", 12.5, INK2))
+    p.append(T(IX, ly + 24, "Two populations, not one: Proposed is the live pipeline", 12, INK2))
+    p.append(T(IX, ly + 42, "(141 of 149 filed 2025-26); Withdrawn is a back-catalogue", 12, INK2))
+    p.append(T(IX, ly + 60, "reaching 2015. A ratio between them means nothing.", 12, ORANGE, weight="600"))
     p.append(T(PL, PT + MH + 30, "each dot is one polygon, sized by its share of the plan's acres", 11, MUTED))
     save(p, "harvest-map.svg")
 
@@ -197,6 +199,54 @@ def chart_changes(data):
     save(p, "status-changes.svg")
 
 
+def chart_withdrawals(snap):
+    """Withdrawal history mined from COMMENTS — available on one download."""
+    import re
+    wd = [v for v in snap.values() if v.get("status") == "Withdrawn"]
+    years = defaultdict(lambda: [0, 0])          # [total, resubmitted]
+    for v in wd:
+        d = v.get("withdrawn_on")
+        if not d:
+            continue
+        years[d[:4]][0] += 1
+        if v.get("resubmitted_as"):
+            years[d[:4]][1] += 1
+    if not years:
+        return
+    ks = sorted(years)
+    W, H = 900, 450
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+         f'<rect width="{W}" height="{H}" fill="{SURFACE}"/>',
+         T(38, 46, "When California's withdrawn harvest plans died", 21, INK, weight="600"),
+         T(38, 70, f"{sum(v[0] for v in years.values())} of 67 withdrawn plans carry a date in CAL FIRE's own "
+                   "comment field.", 13.5, INK2),
+         T(38, 90, "Dates come from the register, not from our captures — this chart needs no archive at all.",
+           11.5, MUTED)]
+    x0, y0, pw, ph = 70, 140, 780, 200
+    mx = max(v[0] for v in years.values())
+    p.append(f'<line x1="{x0}" y1="{y0+ph}" x2="{x0+pw}" y2="{y0+ph}" stroke="{GRID}"/>')
+    bw = pw / len(ks) * 0.6
+    for i, k in enumerate(ks):
+        tot, re_ = years[k]
+        cx = x0 + pw * (i + 0.5) / len(ks)
+        h = ph * tot / mx
+        p.append(f'<rect x="{cx-bw/2:.1f}" y="{y0+ph-h:.1f}" width="{bw:.1f}" height="{h:.1f}" fill="{ORANGE}"/>')
+        if re_:
+            hr = ph * re_ / mx
+            p.append(f'<rect x="{cx-bw/2:.1f}" y="{y0+ph-hr:.1f}" width="{bw:.1f}" height="{hr:.1f}" fill="{BLUE}"/>')
+        p.append(T(cx, y0+ph-h-7, str(tot), 11, INK, anchor="middle", weight="600", tab=True))
+        p.append(T(cx, y0+ph+18, k, 11, INK2, anchor="middle", tab=True))
+    p.append(f'<rect x="{x0}" y="{y0+ph+40}" width="11" height="11" fill="{ORANGE}"/>')
+    p.append(T(x0+18, y0+ph+50, "withdrawn", 12, INK2))
+    p.append(f'<rect x="{x0+118}" y="{y0+ph+40}" width="11" height="11" fill="{BLUE}"/>')
+    p.append(T(x0+136, y0+ph+50, "of which: names a replacement plan", 12, INK2))
+    p.append(T(38, H-46, "13 of the 67 withdrawn plans (19%) name the number they were resubmitted under, so a "
+                         "withdrawal is not always a death.", 11.5, MUTED))
+    p.append(T(38, H-26, "Only 2 of those also carry a date, which is why the blue is thinner here than that "
+                         "19% implies.", 11.5, MUTED))
+    save(p, "withdrawal-record.svg")
+
+
 def main():
     data = observations()
     if not data:
@@ -204,6 +254,7 @@ def main():
         return
     latest = max(data)
     chart_map(polygons(), data[latest], latest[:10])
+    chart_withdrawals(data[latest])
     chart_changes(data)
 
 
