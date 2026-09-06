@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forest Harvest History (wss-forest-harvest)</title>
+<meta name="description" content="Weekly point-in-time captures of forest harvest applications from two regulators that discard the pending stage of their own pipelines. CAL FIRE publishes proposed timber harvest plans for California but keeps no permanent record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling ">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Dataset",
+  "name": "Forest Harvest History (wss-forest-harvest)",
+  "description": "Weekly point-in-time captures of forest harvest applications from two regulators that discard the pending stage of their own pipelines. CAL FIRE publishes proposed timber harvest plans for California but keeps no permanent record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling notifications that age out of the live service after roughly five years, while retaining performed harvests back to 1979. Both regulators keep what was completed and delete what was abandoned, so withdrawal and expiry leave no trace in the official record. This dataset preserves each week's state of both pending queues as the bytes were served, with a manifest row recording the URL, fetch time and SHA-256 of every capture.",
+  "url": "https://github.com/neldivad/wss-forest-harvest",
+  "license": "CC-BY-4.0",
+  "isAccessibleForFree": true,
+  "keywords": [
+    "forestry",
+    "timber harvest",
+    "logging",
+    "deforestation",
+    "land use",
+    "forest policy",
+    "CAL FIRE",
+    "Skogsstyrelsen",
+    "California",
+    "Sweden",
+    "permits",
+    "environmental regulation",
+    "point-in-time-data",
+    "open-data",
+    "git-scraping",
+    "dataset"
+  ],
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "neldivad",
+      "url": "https://github.com/neldivad"
+    }
+  ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://github.com/neldivad/wss-forest-harvest/tree/main/data"
+    }
+  ],
+  "temporalCoverage": "2026-09-04/2026-09-04",
+  "isBasedOn": [
+    {
+      "@type": "Dataset",
+      "name": "CAL FIRE",
+      "url": "https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/CAL_FIRE_Proposed_Harvest_Services_view/FeatureServer/0/query?where=HD_NUM%3C%271-2%27&outFields=HD_NUM%2CPLAN_STAT%2CREGION%2CGIS_ACRES%2CSILVI_1%2CSILVI_2%2CPROJECT_NAME%2CUNIT%2CCOMMENTS%2CLAST_EDITED_DATE&returnGeometry=true&outSR=4326&maxAllowableOffset=0.0002&f=json"
+    },
+    {
+      "@type": "Dataset",
+      "name": "Skogsstyrelsen",
+      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer/0/query?where=Lannr%3D%2721%27+AND+ArendeAr%3D2026+AND+Inkomdatum+%3C+DATE+%272026-03-01%27&outFields=Beteckn%2CLannr%2CKommunnr%2CArendeAr%2CInkomdatum%2CAnmaldHa%2CAvvHa%2CAvvSasong%2CAvverktyp&returnGeometry=false&orderByFields=Beteckn&f=json"
+    }
+  ]
+}
+</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+         Helvetica, Arial, sans-serif; max-width: 46rem; margin: 0 auto;
+         padding: 2.5rem 1.25rem; }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { text-align: left; padding: .4rem .6rem;
+            border-bottom: 1px solid rgba(128,128,128,.3); font-size: .92rem; }
+  code { font-size: .9em; }
+  .cov { font-size: .95rem; }
+  footer { margin-top: 2.5rem; font-size: .85rem; opacity: .75; }
+</style>
+</head>
+<body>
+<h1>Forest Harvest History (wss-forest-harvest)</h1>
+<p>Weekly point-in-time captures of forest harvest applications from two regulators that discard the pending stage of their own pipelines. CAL FIRE publishes proposed timber harvest plans for California but keeps no permanent record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling notifications that age out of the live service after roughly five years, while retaining performed harvests back to 1979. Both regulators keep what was completed and delete what was abandoned, so withdrawal and expiry leave no trace in the official record. This dataset preserves each week&#x27;s state of both pending queues as the bytes were served, with a manifest row recording the URL, fetch time and SHA-256 of every capture.</p>
+<p class="cov">History held: <strong>2026-09-04</strong> to <strong>2026-09-04</strong>.</p>
+
+<h2>What is captured</h2>
+<table>
+  <thead><tr><th>source</th><th>publisher</th><th>cadence</th><th>terms</th></tr></thead>
+  <tbody>
+      <tr><td><code>calfire.harvest.proposed</code></td><td>CAL FIRE</td><td>weekly</td><td>California state open data; see https://data.ca.gov/ and CAL FIRE&#x27;s terms</td></tr>
+      <tr><td><code>skogsstyrelsen.harvest.notified</code></td><td>Skogsstyrelsen</td><td>monthly</td><td>Skogsstyrelsen open data (Geodataportalen); verify terms before redistributing</td></tr>
+  </tbody>
+</table>
+
+<h2>Using it</h2>
+<p>Derived tables are CSV under <code>data/</code> in
+<a href="https://github.com/neldivad/wss-forest-harvest">the repository</a>; the bytes they came from are under
+<code>raw/</code>, and <code>SOURCES.md</code> lists every source URL.</p>
+<p>Every observation carries <code>source_id</code> and <code>raw_ref</code>. The
+matching manifest row holds that <code>raw_ref</code> with the URL, the fetch
+timestamp and a SHA-256 of exactly what came back, so any number here traces to
+the bytes it came from.</p>
+<p>A DOI is minted per release once the repository is connected to Zenodo.</p>
+
+<footer>
+<p>Repository code and captured data are licensed separately. This dataset is
+offered under CC-BY-4.0; each publisher's own terms govern their material and
+are listed per source above. Generated by <code>wss datapage</code> — do not edit
+by hand.</p>
+</footer>
+</body>
+</html>

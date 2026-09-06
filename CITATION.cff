@@ -3,14 +3,34 @@ message: "If you use this dataset, please cite it."
 type: dataset
 title: "Forest Harvest History (wss-forest-harvest)"
 abstract: >-
-  TODO: one paragraph on what this dataset captures, and why the history
-  would otherwise be lost.
+  Weekly point-in-time captures of forest harvest applications from two
+  regulators that discard the pending stage of their own pipelines. CAL FIRE
+  publishes proposed timber harvest plans for California but keeps no permanent
+  record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling
+  notifications that age out of the live service after roughly five years,
+  while retaining performed harvests back to 1979. Both regulators keep what
+  was completed and delete what was abandoned, so withdrawal and expiry leave
+  no trace in the official record. This dataset preserves each week's state of
+  both pending queues as the bytes were served, with a manifest row recording
+  the URL, fetch time and SHA-256 of every capture.
 authors:
   - name: "neldivad"
     website: "https://github.com/neldivad"
 license: CC-BY-4.0
 keywords:
-  - git-scraping
-  - open-data
+  - forestry
+  - timber harvest
+  - logging
+  - deforestation
+  - land use
+  - forest policy
+  - CAL FIRE
+  - Skogsstyrelsen
+  - California
+  - Sweden
+  - permits
+  - environmental regulation
   - point-in-time-data
+  - open-data
+  - git-scraping
   - dataset
