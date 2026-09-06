@@ -20,7 +20,7 @@ concurrency:
 env:
   CADENCE: weekly
   SHARDS: "1" # one CAL FIRE host; N shards would put N runners on it at once
-  ENGINE_SPEC: "wss @ git+https://github.com/${{ github.repository_owner }}/wss-engine.git@v0.5.4"
+  ENGINE_SPEC: "wss @ git+https://github.com/${{ github.repository_owner }}/wss-engine.git@v0.5.7"
 
 jobs:
   plan:
