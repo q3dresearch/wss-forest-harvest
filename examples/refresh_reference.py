@@ -20,7 +20,15 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 REF = REPO / "reference"
-UA = "wss/0.5.4 (contact: neldivad +https://github.com/q3dresearch/wss-forest-harvest)"
+# Version is read from the installed engine rather than hardcoded: a pinned
+# string here went stale at 0.5.4 against a v0.6.0 engine and told publishers
+# the wrong thing about who was calling.
+try:
+    from wss import __version__ as _WSS_VERSION
+except ImportError:
+    _WSS_VERSION = "unknown"
+UA = (f"wss/{_WSS_VERSION} (contact: neldivad "
+      "+https://github.com/q3dresearch/wss-forest-harvest)")
 ARCHIVE = ("https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/"
            "CAL_FIRE_Timber_Harvest_Plans_Service_view_Public/FeatureServer/0/query")
 GAZ = "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2023_Gazetteer/2023_gaz_counties_06.txt"
