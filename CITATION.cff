@@ -19,8 +19,10 @@ authors:
   - name: "q3dresearch"
     website: "https://github.com/q3dresearch"
 license: CC-BY-4.0
-# concept DOI: always resolves to the latest release
-doi: 10.5281/zenodo.22431866
+# DOI removed 2026-09-07: the Zenodo record was deleted by the owner, so
+# 10.5281/zenodo.22431866 now returns HTTP 410 and citing it resolves to a
+# tombstone. A new concept DOI will be minted from the q3dresearch repo via
+# the Zenodo GitHub integration; this field returns when that exists.
 keywords:
   - forestry
   - timber harvest
