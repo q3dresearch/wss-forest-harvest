@@ -6,15 +6,15 @@
 
 <div align="center">
 
-  <a href="https://github.com/neldivad/wss-forest-harvest/actions/workflows/capture-weekly.yml"><img alt="capture status" src="https://img.shields.io/github/actions/workflow/status/neldivad/wss-forest-harvest/capture-weekly.yml?label=capture&style=flat-square"></a>
-  <a href="https://github.com/neldivad/wss-forest-harvest/commits"><img alt="last capture" src="https://img.shields.io/github/last-commit/neldivad/wss-forest-harvest?label=last%20capture&style=flat-square"></a>
-  <a href="https://github.com/neldivad/wss-forest-harvest/blob/main/LICENSE"><img alt="licence" src="https://img.shields.io/github/license/neldivad/wss-forest-harvest?style=flat-square"></a>
-  <a href="https://github.com/neldivad/wss-forest-harvest"><img alt="stars" src="https://img.shields.io/github/stars/neldivad/wss-forest-harvest?style=social"></a>
+  <a href="https://github.com/q3dresearch/wss-forest-harvest/actions/workflows/capture-weekly.yml"><img alt="capture status" src="https://img.shields.io/github/actions/workflow/status/q3dresearch/wss-forest-harvest/capture-weekly.yml?label=capture&style=flat-square"></a>
+  <a href="https://github.com/q3dresearch/wss-forest-harvest/commits"><img alt="last capture" src="https://img.shields.io/github/last-commit/q3dresearch/wss-forest-harvest?label=last%20capture&style=flat-square"></a>
+  <a href="https://github.com/q3dresearch/wss-forest-harvest/blob/main/LICENSE"><img alt="licence" src="https://img.shields.io/github/license/q3dresearch/wss-forest-harvest?style=flat-square"></a>
+  <a href="https://github.com/q3dresearch/wss-forest-harvest"><img alt="stars" src="https://img.shields.io/github/stars/q3dresearch/wss-forest-harvest?style=social"></a>
 
 </div>
 
 <p align="center">
-  <sub>fleet: <a href="https://github.com/neldivad/wss-engine">engine</a> · <a href="https://github.com/neldivad/wss-hugging-face">hugging face</a> · <a href="https://github.com/neldivad/wss-openrouter">openrouter</a> · <a href="https://github.com/neldivad/wss-cloud-footprint">cloud footprint</a> · <a href="https://github.com/neldivad/wss-mining-pipeline">mining</a> · <strong>forest</strong> · <a href="https://github.com/neldivad/wss-food-trace">food</a></sub>
+  <sub>fleet: <a href="https://github.com/q3dresearch/wss-engine">engine</a> · <a href="https://github.com/q3dresearch/wss-hugging-face">hugging face</a> · <a href="https://github.com/q3dresearch/wss-openrouter">openrouter</a> · <a href="https://github.com/q3dresearch/wss-cloud-footprint">cloud footprint</a> · <a href="https://github.com/q3dresearch/wss-mining-pipeline">mining</a> · <strong>forest</strong> · <a href="https://github.com/q3dresearch/wss-food-trace">food</a></sub>
 </p>
 
 **Two forest regulators, two ways of deleting the same thing.**
