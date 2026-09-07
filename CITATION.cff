@@ -19,10 +19,14 @@ authors:
   - name: "q3dresearch"
     website: "https://github.com/q3dresearch"
 license: CC-BY-4.0
-# DOI removed 2026-09-07: the Zenodo record was deleted by the owner, so
-# 10.5281/zenodo.22431866 now returns HTTP 410 and citing it resolves to a
-# tombstone. A new concept DOI will be minted from the q3dresearch repo via
-# the Zenodo GitHub integration; this field returns when that exists.
+# Concept DOI: always resolves to the latest release. Minted 2026-09-07 from
+# q3dresearch/wss-forest-harvest via the Zenodo GitHub integration.
+#
+# This is the SECOND series. The first (10.5281/zenodo.22431866 concept,
+# .22431867 for v2026.1) was deleted by the owner on 2026-09-07 and returns
+# HTTP 410. Do not cite it. Zenodo permits owner deletion within 30 days of
+# publishing, which most registrars deliberately do not.
+doi: 10.5281/zenodo.22647878
 keywords:
   - forestry
   - timber harvest
