@@ -11,7 +11,7 @@
   "@type": "Dataset",
   "name": "Forest Harvest History (wss-forest-harvest)",
   "description": "Weekly point-in-time captures of forest harvest applications from two regulators that discard the pending stage of their own pipelines. CAL FIRE publishes proposed timber harvest plans for California but keeps no permanent record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling notifications that age out of the live service after roughly five years, while retaining performed harvests back to 1979. Both regulators keep what was completed and delete what was abandoned, so withdrawal and expiry leave no trace in the official record. This dataset preserves each week's state of both pending queues as the bytes were served, with a manifest row recording the URL, fetch time and SHA-256 of every capture.",
-  "url": "https://github.com/neldivad/wss-forest-harvest",
+  "url": "https://github.com/q3dresearch/wss-forest-harvest",
   "license": "CC-BY-4.0",
   "isAccessibleForFree": true,
   "keywords": [
@@ -37,17 +37,22 @@
       "@type": "Person",
       "name": "neldivad",
       "url": "https://github.com/neldivad"
+    },
+    {
+      "@type": "Person",
+      "name": "q3dresearch",
+      "url": "https://github.com/q3dresearch"
     }
   ],
   "distribution": [
     {
       "@type": "DataDownload",
       "encodingFormat": "text/csv",
-      "contentUrl": "https://github.com/neldivad/wss-forest-harvest/tree/main/data"
+      "contentUrl": "https://github.com/q3dresearch/wss-forest-harvest/tree/main/data"
     }
   ],
-  "identifier": "https://doi.org/10.5281/zenodo.22431866",
-  "temporalCoverage": "2026-09-04/2026-09-06",
+  "identifier": "https://doi.org/10.5281/zenodo.22647878",
+  "temporalCoverage": "2026-09-04/2026-09-08",
   "isBasedOn": [
     {
       "@type": "Dataset",
@@ -79,7 +84,7 @@
 <body>
 <h1>Forest Harvest History (wss-forest-harvest)</h1>
 <p>Weekly point-in-time captures of forest harvest applications from two regulators that discard the pending stage of their own pipelines. CAL FIRE publishes proposed timber harvest plans for California but keeps no permanent record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling notifications that age out of the live service after roughly five years, while retaining performed harvests back to 1979. Both regulators keep what was completed and delete what was abandoned, so withdrawal and expiry leave no trace in the official record. This dataset preserves each week&#x27;s state of both pending queues as the bytes were served, with a manifest row recording the URL, fetch time and SHA-256 of every capture.</p>
-<p class="cov">History held: <strong>2026-09-04</strong> to <strong>2026-09-06</strong>.</p>
+<p class="cov">History held: <strong>2026-09-04</strong> to <strong>2026-09-08</strong>.</p>
 
 <h2>What is captured</h2>
 <table>
@@ -92,13 +97,13 @@
 
 <h2>Using it</h2>
 <p>Derived tables are CSV under <code>data/</code> in
-<a href="https://github.com/neldivad/wss-forest-harvest">the repository</a>; the bytes they came from are under
+<a href="https://github.com/q3dresearch/wss-forest-harvest">the repository</a>; the bytes they came from are under
 <code>raw/</code>, and <code>SOURCES.md</code> lists every source URL.</p>
 <p>Every observation carries <code>source_id</code> and <code>raw_ref</code>. The
 matching manifest row holds that <code>raw_ref</code> with the URL, the fetch
 timestamp and a SHA-256 of exactly what came back, so any number here traces to
 the bytes it came from.</p>
-<p>Cite this dataset: <a href="https://doi.org/10.5281/zenodo.22431866">https://doi.org/10.5281/zenodo.22431866</a></p>
+<p>Cite this dataset: <a href="https://doi.org/10.5281/zenodo.22647878">https://doi.org/10.5281/zenodo.22647878</a></p>
 
 <footer>
 <p>Repository code and captured data are licensed separately. This dataset is
