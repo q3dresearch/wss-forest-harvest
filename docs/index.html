@@ -86,6 +86,42 @@
 <p>Weekly point-in-time captures of forest harvest applications from two regulators that discard the pending stage of their own pipelines. CAL FIRE publishes proposed timber harvest plans for California but keeps no permanent record of plans that are withdrawn. Skogsstyrelsen publishes Swedish felling notifications that age out of the live service after roughly five years, while retaining performed harvests back to 1979. Both regulators keep what was completed and delete what was abandoned, so withdrawal and expiry leave no trace in the official record. This dataset preserves each week&#x27;s state of both pending queues as the bytes were served, with a manifest row recording the URL, fetch time and SHA-256 of every capture.</p>
 <p class="cov">History held: <strong>2026-09-04</strong> to <strong>2026-09-08</strong>.</p>
 
+
+<h2>Findings</h2>
+<p>Figures are rebuilt from the derived tables on every run; each one names the entities it is about so it can be acted on without a further query.</p>
+  <figure>
+    <a href="charts/cohort-approval.svg"><img src="charts/cohort-approval.svg" alt="Cohort approval" loading="lazy"></a>
+    <figcaption><strong>Cohort approval</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/county-risk.svg"><img src="charts/county-risk.svg" alt="County risk" loading="lazy"></a>
+    <figcaption><strong>County risk</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/deletion-clock.svg"><img src="charts/deletion-clock.svg" alt="Deletion clock" loading="lazy"></a>
+    <figcaption><strong>Deletion clock</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/geography.svg"><img src="charts/geography.svg" alt="Geography" loading="lazy"></a>
+    <figcaption><strong>Geography</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/harvest-map.svg"><img src="charts/harvest-map.svg" alt="Harvest map" loading="lazy"></a>
+    <figcaption><strong>Harvest map</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/pipeline-watch.svg"><img src="charts/pipeline-watch.svg" alt="Pipeline watch" loading="lazy"></a>
+    <figcaption><strong>Pipeline watch</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/status-changes.svg"><img src="charts/status-changes.svg" alt="Status changes" loading="lazy"></a>
+    <figcaption><strong>Status changes</strong></figcaption>
+  </figure>
+  <figure>
+    <a href="charts/withdrawal-record.svg"><img src="charts/withdrawal-record.svg" alt="Withdrawal record" loading="lazy"></a>
+    <figcaption><strong>Withdrawal record</strong></figcaption>
+  </figure>
+
 <h2>What is captured</h2>
 <table>
   <thead><tr><th>source</th><th>publisher</th><th>cadence</th><th>terms</th></tr></thead>
