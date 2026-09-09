@@ -27,7 +27,7 @@ try:
     from wss import __version__ as _WSS_VERSION
 except ImportError:
     _WSS_VERSION = "unknown"
-UA = (f"wss/{_WSS_VERSION} (contact: neldivad "
+UA = (f"wss/{_WSS_VERSION} (contact: q3dresearch "
       "+https://github.com/q3dresearch/wss-forest-harvest)")
 ARCHIVE = ("https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/"
            "CAL_FIRE_Timber_Harvest_Plans_Service_view_Public/FeatureServer/0/query")
