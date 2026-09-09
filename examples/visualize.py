@@ -30,6 +30,21 @@ from collections import defaultdict
 from pathlib import Path
 from xml.sax.saxutils import escape
 
+
+def _open_partition(path):
+    """Open a derived partition, gzipped or not.
+
+    Engine v0.6.34 made `derived/observations/*.csv.gz` the written form. Every
+    reader in this repo went on globbing `*.csv`, found nothing, and said "no
+    observations yet -- run capture + derive first" over a full archive. Stdlib
+    only, so `head`/`zcat` remain the only tools a reader needs.
+    """
+    import gzip
+    import io
+    if str(path).endswith(".gz"):
+        return io.TextIOWrapper(gzip.open(path, "rb"), encoding="utf-8", newline="")
+    return open(path, encoding="utf-8", newline="")
+
 REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "examples" / "charts"
 SURFACE, INK, INK2, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#898781"
@@ -86,8 +101,8 @@ def plans_from(snap):
 def observations():
     """{observed_at: {entity: {metric: value}}}, deduplicated on captured_at."""
     seen = {}
-    for part in sorted((REPO / "derived" / "observations").glob("*.csv")):
-        with part.open(encoding="utf-8", newline="") as fh:
+    for part in sorted((REPO / "derived" / "observations").glob("*.csv*")):
+        with _open_partition(part) as fh:
             for r in csv.DictReader(fh):
                 k = (r["observed_at"], r["entity_id"], r["metric"])
                 if k not in seen or r["captured_at"] > seen[k][0]:
