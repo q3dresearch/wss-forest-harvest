@@ -1,3 +1,3 @@
-source_id,first_success_at,last_success_at,last_attempt_at,consecutive_failures,consecutive_throttled,expected_interval_h,staleness_h,gate_fail_rate_28d,status
-skogsstyrelsen.harvest.notified,2026-09-04T14:04:42Z,2026-09-07T19:22:54Z,2026-09-07T19:22:54Z,0,0,720,48.6,0.001,active
-calfire.harvest.proposed,2026-09-04T09:57:17Z,2026-09-08T00:19:18Z,2026-09-08T00:19:18Z,0,0,168,43.7,0.000,active
+source_id,first_success_at,last_success_at,last_attempt_at,consecutive_failures,consecutive_throttled,expected_interval_h,staleness_h,gate_fail_rate_28d,attempts_28d,status
+skogsstyrelsen.harvest.notified,2026-09-04T14:04:42Z,2026-09-07T19:22:54Z,2026-09-07T19:22:54Z,0,0,720,85.7,0.001,904,active
+calfire.harvest.proposed,2026-09-04T09:57:17Z,2026-09-08T00:19:18Z,2026-09-08T00:19:18Z,0,0,168,80.8,0.000,56,active
