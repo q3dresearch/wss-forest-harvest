@@ -14,109 +14,101 @@
 <text x="626.0" y="148.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">35</text>
 <text x="706.0" y="148.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">6</text>
 <text x="802.0" y="148.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">14.6%</text>
-<text x="196.0" y="174.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Plumas (PLU)</text>
-<rect x="210" y="163" width="183.6" height="15" fill="#eb6834"/>
-<rect x="210" y="163" width="155.3" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="400.6" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">9.0%</text>
-<text x="626.0" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">61</text>
-<text x="706.0" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">6</text>
-<text x="802.0" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">7.6%</text>
-<text x="196.0" y="200.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Tehama (TEH)</text>
-<rect x="210" y="189" width="151.9" height="15" fill="#eb6834"/>
-<rect x="210" y="189" width="151.9" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="368.9" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">7.4%</text>
-<text x="626.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">25</text>
-<text x="706.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">2</text>
-<text x="802.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">7.4%</text>
-<text x="196.0" y="226.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Placer (PLA)</text>
-<rect x="210" y="215" width="128.1" height="15" fill="#eb6834"/>
-<rect x="210" y="215" width="87.2" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="345.1" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">6.2%</text>
-<text x="626.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">45</text>
-<text x="706.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">3</text>
-<text x="802.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">4.3%</text>
-<text x="196.0" y="252.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Santa Cruz (SCR)</text>
-<rect x="210" y="241" width="107.9" height="15" fill="#eb6834"/>
-<rect x="210" y="241" width="107.9" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="324.9" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">5.3%</text>
-<text x="626.0" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">54</text>
-<text x="706.0" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">3</text>
-<text x="802.0" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">5.3%</text>
-<text x="196.0" y="278.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Tuolumne (TUO)</text>
-<rect x="210" y="267" width="70.7" height="15" fill="#eb6834"/>
-<text x="287.7" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">3.4%</text>
-<text x="626.0" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">28</text>
+<text x="196.0" y="174.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Santa Cruz (SCR)</text>
+<rect x="210" y="163" width="107.9" height="15" fill="#eb6834"/>
+<rect x="210" y="163" width="107.9" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
+<text x="324.9" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">5.3%</text>
+<text x="626.0" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">54</text>
+<text x="706.0" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">3</text>
+<text x="802.0" y="174.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">5.3%</text>
+<text x="196.0" y="200.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Mendocino (MEN)</text>
+<rect x="210" y="189" width="59.0" height="15" fill="#eb6834"/>
+<rect x="210" y="189" width="36.7" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
+<text x="276.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">2.9%</text>
+<text x="626.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">439</text>
+<text x="706.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">13</text>
+<text x="802.0" y="200.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.8%</text>
+<text x="196.0" y="226.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Humboldt (HUM)</text>
+<rect x="210" y="215" width="28.0" height="15" fill="#eb6834"/>
+<rect x="210" y="215" width="28.0" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
+<text x="245.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.4%</text>
+<text x="626.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">722</text>
+<text x="706.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">10</text>
+<text x="802.0" y="226.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.4%</text>
+<text x="196.0" y="252.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Del Norte (DEL)</text>
+<rect x="210" y="241" width="24.6" height="15" fill="#eb6834"/>
+<rect x="210" y="241" width="24.6" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
+<text x="241.6" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.2%</text>
+<text x="626.0" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">165</text>
+<text x="706.0" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">2</text>
+<text x="802.0" y="252.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.2%</text>
+<text x="196.0" y="278.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Trinity (TRI)</text>
+<rect x="210" y="267" width="22.5" height="15" fill="#eb6834"/>
+<rect x="210" y="267" width="22.5" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
+<text x="239.5" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.1%</text>
+<text x="626.0" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">90</text>
 <text x="706.0" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1</text>
-<text x="802.0" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
-<text x="196.0" y="304.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Butte (BUT)</text>
-<rect x="210" y="293" width="70.7" height="15" fill="#eb6834"/>
-<text x="287.7" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">3.4%</text>
-<text x="626.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">28</text>
-<text x="706.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1</text>
-<text x="802.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
-<text x="196.0" y="330.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Mendocino (MEN)</text>
-<rect x="210" y="319" width="59.0" height="15" fill="#eb6834"/>
-<rect x="210" y="319" width="36.7" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="276.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">2.9%</text>
-<text x="626.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">439</text>
-<text x="706.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">13</text>
-<text x="802.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.8%</text>
-<text x="196.0" y="356.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Siskiyou (SIS)</text>
-<rect x="210" y="345" width="47.1" height="15" fill="#eb6834"/>
-<rect x="210" y="345" width="47.1" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="264.1" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">2.3%</text>
-<text x="626.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">170</text>
-<text x="706.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">4</text>
-<text x="802.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">2.3%</text>
-<text x="196.0" y="382.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Shasta (SHA)</text>
-<rect x="210" y="371" width="38.5" height="15" fill="#eb6834"/>
-<rect x="210" y="371" width="19.4" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="255.5" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.9%</text>
-<text x="626.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">209</text>
-<text x="706.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">4</text>
-<text x="802.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#4a3aa7" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.9%</text>
-<text x="196.0" y="408.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Lassen (LAS)</text>
-<rect x="210" y="397" width="36.0" height="15" fill="#eb6834"/>
-<rect x="210" y="397" width="36.0" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="253.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.8%</text>
-<text x="626.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">56</text>
-<text x="706.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1</text>
-<text x="802.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.8%</text>
-<text x="196.0" y="434.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Nevada (NEV)</text>
-<rect x="210" y="423" width="35.3" height="15" fill="#eb6834"/>
-<rect x="210" y="423" width="35.3" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="252.3" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.7%</text>
-<text x="626.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">57</text>
-<text x="706.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1</text>
-<text x="802.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.7%</text>
-<text x="196.0" y="460.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">El Dorado (ELD)</text>
-<rect x="210" y="449" width="30.1" height="15" fill="#eb6834"/>
-<rect x="210" y="449" width="30.1" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="247.1" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.5%</text>
-<text x="626.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">67</text>
-<text x="706.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1</text>
-<text x="802.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.5%</text>
-<text x="196.0" y="486.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Humboldt (HUM)</text>
-<rect x="210" y="475" width="28.0" height="15" fill="#eb6834"/>
-<rect x="210" y="475" width="28.0" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="245.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.4%</text>
-<text x="626.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">722</text>
-<text x="706.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">10</text>
-<text x="802.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.4%</text>
-<text x="196.0" y="512.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Del Norte (DEL)</text>
-<rect x="210" y="501" width="24.6" height="15" fill="#eb6834"/>
-<rect x="210" y="501" width="24.6" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="241.6" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.2%</text>
-<text x="626.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">165</text>
-<text x="706.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">2</text>
-<text x="802.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.2%</text>
-<text x="196.0" y="538.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Trinity (TRI)</text>
-<rect x="210" y="527" width="22.5" height="15" fill="#eb6834"/>
-<rect x="210" y="527" width="22.5" height="15" fill="#4a3aa7" fill-opacity="0.85"/>
-<text x="239.5" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">1.1%</text>
-<text x="626.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">90</text>
-<text x="706.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1</text>
-<text x="802.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.1%</text>
+<text x="802.0" y="278.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">1.1%</text>
+<text x="196.0" y="304.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Placer (PLA)</text>
+<rect x="210" y="293" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">45</text>
+<text x="706.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="304.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="330.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Tehama (TEH)</text>
+<rect x="210" y="319" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">25</text>
+<text x="706.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="330.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="356.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Shasta (SHA)</text>
+<rect x="210" y="345" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">209</text>
+<text x="706.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="356.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="382.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Nevada (NEV)</text>
+<rect x="210" y="371" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">57</text>
+<text x="706.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="382.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="408.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Siskiyou (SIS)</text>
+<rect x="210" y="397" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">170</text>
+<text x="706.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="408.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="434.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Lassen (LAS)</text>
+<rect x="210" y="423" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">56</text>
+<text x="706.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="434.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="460.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Tuolumne (TUO)</text>
+<rect x="210" y="449" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">28</text>
+<text x="706.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="460.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="486.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Plumas (PLU)</text>
+<rect x="210" y="475" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">61</text>
+<text x="706.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="486.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="512.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">Butte (BUT)</text>
+<rect x="210" y="501" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">28</text>
+<text x="706.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="512.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="196.0" y="538.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#0b0b0b" text-anchor="end" font-weight="normal" style="">El Dorado (ELD)</text>
+<rect x="210" y="527" width="0.0" height="15" fill="#eb6834"/>
+<text x="217.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#52514e" text-anchor="start" font-weight="600" style="font-variant-numeric: tabular-nums;">0.0%</text>
+<text x="626.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">67</text>
+<text x="706.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0</text>
+<text x="802.0" y="538.5" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="end" font-weight="normal" style="font-variant-numeric: tabular-nums;">0.0%</text>
 <text x="38.0" y="578.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#52514e" text-anchor="start" font-weight="normal" style="">Humboldt resolves 732 plans and loses 10 — 1.4%. Sonoma resolves 41 and loses 6, which is 14.6%.</text>
 <text x="38.0" y="598.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#898781" text-anchor="start" font-weight="normal" style="">Violet is the rate after removing withdrawals that name a replacement plan: those are refilings, not failures.</text>
 <text x="38.0" y="620.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#898781" text-anchor="start" font-weight="normal" style="">The retained withdrawal set may be incomplete, so every rate here is a lower bound.</text>

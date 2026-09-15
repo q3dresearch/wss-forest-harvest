@@ -2,9 +2,5 @@
 <rect width="900" height="380" fill="#fcfcfb"/>
 <text x="38.0" y="46.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="21" fill="#0b0b0b" text-anchor="start" font-weight="600" style="">Which plans changed status</text>
 <text x="38.0" y="70.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="13.5" fill="#52514e" text-anchor="start" font-weight="normal" style="">Every move between Proposed, Withdrawn and Denied, capture to capture.</text>
-<rect x="60" y="118" width="780" height="180" fill="#f4f3ef"/>
-<text x="450.0" y="196.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="26" fill="#0b0b0b" text-anchor="middle" font-weight="600" style="font-variant-numeric: tabular-nums;">1 of 2 captures</text>
-<text x="450.0" y="224.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12.5" fill="#52514e" text-anchor="middle" font-weight="normal" style="">A withdrawal is erased from the public record; this is the only place it survives.</text>
-<text x="450.0" y="250.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#eb6834" text-anchor="middle" font-weight="normal" style="">renderable at the next weekly capture</text>
-<text x="38.0" y="340.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="11.5" fill="#898781" text-anchor="start" font-weight="normal" style="">Drawing a trend from one observation would be worse than drawing nothing.</text>
+<text x="38.0" y="92.0" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' font-size="12" fill="#898781" text-anchor="start" font-weight="normal" style="">2026-09-07 → 2026-09-08 · 0 plan(s) moved</text>
 </svg>
