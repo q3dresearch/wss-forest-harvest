@@ -1,0 +1,339 @@
+{
+  "generated_at": "2026-09-15T13:14:38Z",
+  "note": "Inferred from the derived rows by `wss schema`, not hand-written. Regenerate after any derive.",
+  "sources": {
+    "calfire.harvest.proposed": {
+      "source_id": "calfire.harvest.proposed",
+      "schema_id": "harvest.v1",
+      "cadence": "weekly",
+      "licence": "California state open data; see https://data.ca.gov/ and CAL FIRE's terms",
+      "personal_data": "none",
+      "storage": "git",
+      "publisher": "CAL FIRE",
+      "publisher_tier": "first_party",
+      "endpoints": 14
+    },
+    "skogsstyrelsen.harvest.notified": {
+      "source_id": "skogsstyrelsen.harvest.notified",
+      "schema_id": "harvest.notified.v1",
+      "cadence": "monthly",
+      "licence": "Skogsstyrelsen open data (Geodataportalen); verify terms before redistributing",
+      "personal_data": "none",
+      "storage": "git",
+      "publisher": "Skogsstyrelsen",
+      "publisher_tier": "first_party",
+      "endpoints": 226
+    }
+  },
+  "observations": {
+    "rows": 13577,
+    "columns": [
+      "series_id",
+      "entity_id",
+      "observed_at",
+      "captured_at",
+      "metric",
+      "value",
+      "unit",
+      "source_id",
+      "raw_ref",
+      "parser_version"
+    ],
+    "partitions": [
+      "2026-09.csv.gz"
+    ],
+    "series": {
+      "calfire.harvest.proposed": {
+        "rows": 3877,
+        "entities": 218,
+        "entity_id_samples": [
+          "plan:ca:1-15NTMP-007-SON",
+          "plan:ca:1-16-018-HUM",
+          "plan:ca:1-16-049-MEN"
+        ],
+        "metrics": [
+          "acres",
+          "county",
+          "filed_year",
+          "note",
+          "polygons",
+          "region",
+          "resubmitted_as",
+          "silviculture",
+          "status",
+          "withdrawn_on"
+        ]
+      },
+      "skogsstyrelsen.harvest.notified": {
+        "rows": 9700,
+        "entities": 1320,
+        "entity_id_samples": [
+          "cohort:se:01:2021:2021-09",
+          "cohort:se:01:2021:2021-10",
+          "cohort:se:01:2021:2021-11"
+        ],
+        "metrics": [
+          "harvested_ha",
+          "notices",
+          "notified_ha",
+          "with_outcome"
+        ]
+      }
+    },
+    "parser_versions": [
+      "2",
+      "3"
+    ]
+  },
+  "metrics": {
+    "acres": {
+      "rows": 518,
+      "unit": "acres",
+      "type": "number",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 218,
+      "distinct_values": 217,
+      "empty": 0,
+      "min": "0.63",
+      "max": "3249.55",
+      "samples": [
+        "0.63",
+        "0.78",
+        "100.39"
+      ]
+    },
+    "county": {
+      "rows": 516,
+      "unit": "",
+      "type": "text",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 217,
+      "distinct_values": 28,
+      "empty": 0,
+      "samples": [
+        "AMA",
+        "BUT",
+        "CAL"
+      ]
+    },
+    "filed_year": {
+      "rows": 516,
+      "unit": "year",
+      "type": "number",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 217,
+      "distinct_values": 12,
+      "empty": 0,
+      "min": "2015",
+      "max": "2026",
+      "samples": [
+        "2015",
+        "2016",
+        "2017"
+      ]
+    },
+    "harvested_ha": {
+      "rows": 2425,
+      "unit": "hectares",
+      "type": "number",
+      "series": [
+        "skogsstyrelsen.harvest.notified"
+      ],
+      "entities": 1320,
+      "distinct_values": 863,
+      "empty": 0,
+      "min": "0.0",
+      "max": "832.4",
+      "samples": [
+        "0.0",
+        "0.3",
+        "0.4"
+      ]
+    },
+    "note": {
+      "rows": 168,
+      "unit": "",
+      "type": "text",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 117,
+      "distinct_values": 94,
+      "empty": 0,
+      "samples": [
+        "17 acres Clearcut and 2 acres Selection not delineated on map",
+        "3",
+        "AP is also Shelterwood Removal"
+      ]
+    },
+    "notices": {
+      "rows": 2425,
+      "unit": "count",
+      "type": "number",
+      "series": [
+        "skogsstyrelsen.harvest.notified"
+      ],
+      "entities": 1320,
+      "distinct_values": 307,
+      "empty": 0,
+      "min": "1",
+      "max": "827",
+      "samples": [
+        "1",
+        "10",
+        "100"
+      ]
+    },
+    "notified_ha": {
+      "rows": 2425,
+      "unit": "hectares",
+      "type": "number",
+      "series": [
+        "skogsstyrelsen.harvest.notified"
+      ],
+      "entities": 1320,
+      "distinct_values": 1313,
+      "empty": 0,
+      "min": "0.3",
+      "max": "4022.6",
+      "samples": [
+        "0.3",
+        "0.4",
+        "0.7"
+      ]
+    },
+    "polygons": {
+      "rows": 518,
+      "unit": "count",
+      "type": "number",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 218,
+      "distinct_values": 62,
+      "empty": 0,
+      "min": "1",
+      "max": "212",
+      "samples": [
+        "1",
+        "10",
+        "101"
+      ]
+    },
+    "region": {
+      "rows": 515,
+      "unit": "",
+      "type": "number",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 217,
+      "distinct_values": 4,
+      "empty": 0,
+      "min": "1",
+      "max": "4",
+      "samples": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "resubmitted_as": {
+      "rows": 18,
+      "unit": "",
+      "type": "text",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 13,
+      "distinct_values": 13,
+      "empty": 0,
+      "samples": [
+        "1-18-043-MEN",
+        "1-19NTMP-00011-MEN",
+        "1-20-00123-MEN"
+      ]
+    },
+    "silviculture": {
+      "rows": 515,
+      "unit": "",
+      "type": "text",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 217,
+      "distinct_values": 16,
+      "empty": 0,
+      "samples": [
+        "Alternative Prescription",
+        "Clearcut",
+        "Commercial Thin"
+      ]
+    },
+    "status": {
+      "rows": 518,
+      "unit": "",
+      "type": "text",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 218,
+      "distinct_values": 3,
+      "empty": 0,
+      "samples": [
+        "Denied",
+        "Proposed",
+        "Withdrawn"
+      ]
+    },
+    "with_outcome": {
+      "rows": 2425,
+      "unit": "count",
+      "type": "number",
+      "series": [
+        "skogsstyrelsen.harvest.notified"
+      ],
+      "entities": 1320,
+      "distinct_values": 105,
+      "empty": 0,
+      "min": "0",
+      "max": "259",
+      "samples": [
+        "0",
+        "1",
+        "10"
+      ]
+    },
+    "withdrawn_on": {
+      "rows": 75,
+      "unit": "",
+      "type": "date",
+      "series": [
+        "calfire.harvest.proposed"
+      ],
+      "entities": 47,
+      "distinct_values": 44,
+      "empty": 0,
+      "min": "2016-01-04",
+      "max": "2026-07-20",
+      "samples": [
+        "2016-01-04",
+        "2016-06-30",
+        "2017-05-08"
+      ]
+    }
+  },
+  "raw": {
+    "files": 437,
+    "bytes_on_disk": 41255793,
+    "capture_dates": 4,
+    "first_capture": "2026-09-04T09:57:17Z",
+    "last_capture": "2026-09-08T00:19:18Z"
+  }
+}
