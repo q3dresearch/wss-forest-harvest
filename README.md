@@ -91,8 +91,16 @@ them, or as a worked example of mapping polygons with no GIS stack at all.
 - [How it works](docs/design.md) — partitioning, geometry, byte-stability, running it locally
 - [Sources and licences](SOURCES.md)
 
-Code MIT ([LICENSE](LICENSE)); data CC-BY-4.0 ([LICENSE-DATA](LICENSE-DATA)),
-citation in [CITATION.cff](CITATION.cff). Captured content remains subject to
-each publisher's terms.
+Code MIT ([LICENSE](LICENSE)); see **Licences** below for the data — it is
+not CC-BY-4.0. Citation in [CITATION.cff](CITATION.cff).
 
 Topics: `git-scraping` · `open-data` · `point-in-time-data` · `forestry` · `gis`
+
+## Licences
+
+Code MIT ([LICENSE](LICENSE)). **The data is not CC-BY-4.0** — see
+[LICENSE-DATA](LICENSE-DATA). The Skogsstyrelsen source carries an unresolved
+**verify terms before redistributing** flag, and Sweden is an EU member state
+where a compiled dataset can attract the sui generis database right
+independently of copyright. The CAL FIRE source points at terms rather than
+stating them. Attribute the original agencies, not this repository.

@@ -18,7 +18,8 @@ authors:
     website: "https://github.com/neldivad"
   - name: "q3dresearch"
     website: "https://github.com/q3dresearch"
-license: CC-BY-4.0
+# No `license:` field: Skogsstyrelsen terms unverified and EU database rights may apply
+# The CODE is MIT (see LICENSE); this file cites the DATASET.
 # Concept DOI: always resolves to the latest release. Minted 2026-09-07 from
 # q3dresearch/wss-forest-harvest via the Zenodo GitHub integration.
 #
