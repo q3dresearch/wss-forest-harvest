@@ -96,6 +96,25 @@ not CC-BY-4.0. Citation in [CITATION.cff](CITATION.cff).
 
 Topics: `git-scraping` · `open-data` · `point-in-time-data` · `forestry` · `gis`
 
+## Questions this exists to answer
+
+![All 8 questions here are answered or on a clock.](examples/charts/maturity.svg)
+
+**6 of these 8 are answered from captures already held.** 2 become answerable only as the series lengthens — the plate shows when. Every other one is on the clock, so the plate is a schedule rather than a wish list.
+
+
+| # | question | status |
+| --- | --- | --- |
+| Q1 | Where does California propose to cut? | **answered** — 4,486 polygons → [harvest map](examples/charts/harvest-map.svg) |
+| Q2 | What share of filed plans reach approval? | **answered** — roughly 97 in 100 → [cohort approval](examples/charts/cohort-approval.svg) |
+| Q3 | Which counties withdraw most — by count, or by rate? | **answered, and the base reverses it.** The county with the most withdrawals has one of the lowest rates → [county risk](examples/charts/county-risk.svg) |
+| Q4 | Does geography predict withdrawal? | **answered — barely.** Northern counties withdraw slightly less, and it does not survive a test at n=16 → [geography](examples/charts/geography.svg) |
+| Q5 | When did the withdrawn plans die? | **answered** — CAL FIRE's own comment field dates 44 of 67 → [withdrawal record](examples/charts/withdrawal-record.svg) |
+| Q6 | How long does Sweden keep harvest intentions? | **answered** — outcomes for 47 years, intentions for about five → [deletion clock](examples/charts/deletion-clock.svg) |
+| Q7 | Which plans change status, and how fast? | needs 2+ captures → [status changes](examples/charts/status-changes.svg), which fills itself in as captures accumulate |
+| Q8 | Does CAL FIRE keep its withdrawal back-catalogue? | needs 2+ captures. **Speculative — nothing guarantees it does** → [pipeline watch](examples/charts/pipeline-watch.svg) |
+
+
 ## Licences
 
 Code MIT ([LICENSE](LICENSE)). **The data is not CC-BY-4.0** — see
